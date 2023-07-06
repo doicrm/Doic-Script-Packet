@@ -67,7 +67,7 @@ namespace GOTHIC_ENGINE {
 
     // by Boguś
     template<typename T>
-    int _cdecl Ext_ReadStatArray()
+    int Ext_ReadStatArray()
     {
         auto par = zCParser::GetParser();
 
@@ -95,7 +95,7 @@ namespace GOTHIC_ENGINE {
 
     // by Boguś
     template<typename T>
-    int _cdecl Ext_WriteStatArray()
+    int Ext_WriteStatArray()
     {
         auto par = zCParser::GetParser();
 

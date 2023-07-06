@@ -78,12 +78,13 @@ namespace GOTHIC_ENGINE {
     void Game_DefineExternals() {
         parser->DefineExternal("Log_GetTopicStatus", Log_GetTopicStatus, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
 
-        parser->DefineExternal("Wld_PlayEffectOnVob", &Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-        parser->DefineExternal("Wld_PlayEffectAt", &Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+        parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+        parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
 
         //parser->DefineExternal("Wld_InsertVob", &Wld_InsertVob, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
-        parser->DefineExternal("Vob_GetPos", &Vob_GetPos, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
-        parser->DefineExternal("Vob_SetPos", &Vob_SetPos, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
+        parser->DefineExternal("Vob_GetPos", Vob_GetPos, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
+        parser->DefineExternal("Vob_SetPos", Vob_SetPos, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
+        parser->DefineExternal("Vob_SetVisual", Vob_SetVisual, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
 
         parser->DefineExternal("ReadStatIntArray", Ext_ReadStatArray<int>, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         parser->DefineExternal("ReadStatStringArray", Ext_ReadStatArray<zSTRING>, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
