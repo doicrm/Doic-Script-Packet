@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>E:\dev\Union Plugins\zNewExternals\Bin\zNewExternals.dll</FullPath>
+      <FullPath>C:\Dev\zNewExternals\Bin\zNewExternals.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
