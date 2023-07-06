@@ -48,4 +48,21 @@ namespace GOTHIC_ENGINE {
 
         return 0;
     }
+
+    int Vob_SetVisual()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName;
+        zSTRING visualName;
+        par->GetParameter(vobName);
+        par->GetParameter(visualName);
+        zCVob* pVob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        //if (!pVob)
+        //    zerr.Warning("U:MOB:CreateItems : No Mob found with specified Vobname: " + vobName);
+        //else
+        //    pVob->SetVisual(visualName);
+        if (pVob)
+            pVob->SetVisual(visualName);
+        return 0;
+    }
 }

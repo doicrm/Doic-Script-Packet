@@ -65,7 +65,7 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    // by Bogu�
+    // by Boguś
     template<typename T>
     int _cdecl Ext_ReadStatArray()
     {
@@ -93,7 +93,7 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    // by Bogu�
+    // by Boguś
     template<typename T>
     int _cdecl Ext_WriteStatArray()
     {
