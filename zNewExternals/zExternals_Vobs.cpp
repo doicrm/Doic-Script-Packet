@@ -80,4 +80,20 @@ namespace GOTHIC_ENGINE {
             vob->SetVisual(visualName);
         return 0;
     }
+
+    int Vob_ClearVisual()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName;
+        zSTRING visualName;
+        const char* value = 0;
+        par->GetParameter(visualName);
+        par->GetParameter(vobName);
+        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        if (!vob)
+            cmd << "No Vob found with specified name: " << vobName << endl;
+        else
+            vob->SetVisual(value);
+        return 0;
+    }
 }
