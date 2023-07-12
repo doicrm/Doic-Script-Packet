@@ -85,9 +85,7 @@ namespace GOTHIC_ENGINE {
     {
         zCParser* par = zCParser::GetParser();
         zSTRING vobName;
-        zSTRING visualName;
         const char* value = 0;
-        par->GetParameter(visualName);
         par->GetParameter(vobName);
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
         if (!vob)
