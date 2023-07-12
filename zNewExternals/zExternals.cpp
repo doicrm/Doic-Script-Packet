@@ -3,16 +3,19 @@
 
 namespace GOTHIC_ENGINE {
     // by Gratt from zParserExtender
-    int Log_GetTopicStatus() {
+    int Log_GetTopicStatus()
+    {
         zCParser* par = zCParser::GetParser();
         zSTRING value;
         par->GetParameter(value);
         oCLogManager& logs = oCLogManager::GetLogManager();
 
         auto* list = &logs.m_lstTopics;
-        while (list) {
+        while (list)
+        {
             auto topic = list->data;
-            if (topic && topic->m_strDescription == value) {
+            if (topic && topic->m_strDescription == value)
+            {
                 par->SetReturn(topic->m_enuStatus);
                 return 0;
             }
@@ -24,7 +27,8 @@ namespace GOTHIC_ENGINE {
     }
 
     // by Gratt from zParserExtender
-    int Wld_PlayEffectOnVob() {
+    int Wld_PlayEffectOnVob()
+    {
         zCParser* par = zCParser::GetParser();
         zSTRING effect;
         zCVob* pvob;
@@ -45,7 +49,8 @@ namespace GOTHIC_ENGINE {
     }
 
     // by Gratt from zParserExtender
-    int Wld_PlayEffectAt() {
+    int Wld_PlayEffectAt()
+    {
         zCParser* par = zCParser::GetParser();
         zSTRING effect;
         zVEC3 ppos;

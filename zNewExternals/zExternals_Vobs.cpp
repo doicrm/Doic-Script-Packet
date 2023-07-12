@@ -17,7 +17,8 @@ namespace GOTHIC_ENGINE {
     };
 
     // by Gratt from zParserExtender
-    int Vob_GetPos() {
+    int Vob_GetPos()
+    {
         static C_POSITION vobPosition;
         zCParser* par = zCParser::GetParser();
         zCVob* vob = (zCVob*)par->GetInstance();
@@ -31,7 +32,8 @@ namespace GOTHIC_ENGINE {
     }
 
     // by Gratt from zParserExtender
-    int Vob_SetPos() {
+    int Vob_SetPos()
+    {
         zCParser* par = zCParser::GetParser();
         C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         zCVob* vob = (zCVob*)par->GetInstance();
@@ -52,7 +54,6 @@ namespace GOTHIC_ENGINE {
     //    zSTRING visualName;
     //    par->GetParameter(visualName);
     //    par->GetParameter(vobName);
-    //    int instance = par->CreateInstance();
     //    C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
     //    oCVob* vob = ogame->GetGameWorld()->CreateVob(zVOB_TYPE_NORMAL, instance);
     //    if (!vob)
@@ -76,6 +77,7 @@ namespace GOTHIC_ENGINE {
         if (!vob)
         {
             cmd << "No Vob found with specified name: " << vobName << endl;
+            par->SetReturn(FALSE);
             return 0;
         }
         ogame->GetGameWorld()->RemoveVob(vob);
@@ -102,13 +104,12 @@ namespace GOTHIC_ENGINE {
     {
         zCParser* par = zCParser::GetParser();
         zSTRING vobName;
-        const char* value = 0;
         par->GetParameter(vobName);
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
         if (!vob)
             cmd << "No Vob found with specified name: " << vobName << endl;
         else
-            vob->SetVisual(value);
+            vob->SetVisual(NULL);
         return 0;
     }
 }
