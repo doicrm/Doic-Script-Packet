@@ -45,7 +45,8 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    //int Wld_InsertVob() {
+    //int Wld_InsertVob()
+    //{
     //    zCParser* par = zCParser::GetParser();
     //    zSTRING vobName;
     //    zSTRING visualName;
@@ -65,6 +66,22 @@ namespace GOTHIC_ENGINE {
     //    vob->Release();
     //    return 0;
     //}
+
+    int Wld_RemoveVob()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName;
+        par->GetParameter(vobName);
+        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        if (!vob)
+        {
+            cmd << "No Vob found with specified name: " << vobName << endl;
+            return 0;
+        }
+        ogame->GetGameWorld()->RemoveVob(vob);
+        par->SetReturn(TRUE);
+        return 0;
+    }
 
     int Vob_SetVisual()
     {

@@ -87,9 +87,15 @@ namespace GOTHIC_ENGINE {
 
         // func void Wld_InsertVob (var string vobName, var C_POSITION position) 
         //parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, 0);
+
+        // func int Wld_RemoveVob (var string vobName)
+        parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
         parser->DefineExternal("Vob_GetPos", Vob_GetPos, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
         parser->DefineExternal("Vob_SetPos", Vob_SetPos, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
+        // func void Vob_SetVisual (var string vobName, var string visualName)
         parser->DefineExternal("Vob_SetVisual", Vob_SetVisual, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        // func void Vob_ClearVisual (var string vobName)
+        parser->DefineExternal("Vob_ClearVisual", Vob_ClearVisual, zPAR_TYPE_VOID, zPAR_TYPE_STRING, 0);
 
         parser->DefineExternal("ReadStatIntArray", Ext_ReadStatArray<int>, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         parser->DefineExternal("ReadStatStringArray", Ext_ReadStatArray<zSTRING>, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
