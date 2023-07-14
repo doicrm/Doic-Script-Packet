@@ -47,26 +47,36 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    //int Wld_InsertVob()
-    //{
-    //    zCParser* par = zCParser::GetParser();
-    //    zSTRING vobName;
-    //    zSTRING visualName;
-    //    par->GetParameter(visualName);
-    //    par->GetParameter(vobName);
-    //    C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
-    //    oCVob* vob = ogame->GetGameWorld()->CreateVob(zVOB_TYPE_NORMAL, instance);
-    //    if (!vob)
-    //        return 0;
-    //    vob->SetPositionWorld(zVEC3(
-    //        (float)vobPosition->X,
-    //        (float)vobPosition->Y,
-    //        (float)vobPosition->Z));
-    //    ogame->GetGameWorld()->AddVob(vob);
-    //    vob->SetVisual(visualName);
-    //    vob->Release();
-    //    return 0;
-    //}
+    int Wld_InsertVob()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName, visualName;
+        BOOL collDet = FALSE;
+        BOOL isSetOnFloor = FALSE;
+        par->GetParameter(isSetOnFloor);
+        par->GetParameter(collDet);
+        par->GetParameter(visualName); 
+        par->GetParameter(vobName);
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z);
+        oCVob* vob = new oCVob();
+        if (!vob)
+            return 0;
+        vob->SetPositionWorld(pos);
+        vob->SetVisual(visualName);
+        vob->SetCollDet(FALSE);
+        ogame->GetGameWorld()->AddVob(vob);
+        if (isSetOnFloor)
+            vob->SetOnFloor(pos);
+        vob->SetCollDet(collDet);
+        vob->SetPhysicsEnabled(TRUE);
+        vob->SetSleeping(TRUE);
+        vob->Release();
+        return 0;
+    }
 
     int Wld_RemoveVob()
     {
@@ -76,7 +86,7 @@ namespace GOTHIC_ENGINE {
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
         if (!vob)
         {
-            cmd << "No Vob found with specified name: " << vobName << endl;
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
             par->SetReturn(FALSE);
             return 0;
         }
@@ -88,13 +98,12 @@ namespace GOTHIC_ENGINE {
     int Vob_SetVisual()
     {
         zCParser* par = zCParser::GetParser();
-        zSTRING vobName;
-        zSTRING visualName;
+        zSTRING vobName, visualName;
         par->GetParameter(visualName);
         par->GetParameter(vobName);
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
         if (!vob)
-            cmd << "No Vob found with specified name: " << vobName << endl;
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
         else
             vob->SetVisual(visualName);
         return 0;
@@ -107,9 +116,60 @@ namespace GOTHIC_ENGINE {
         par->GetParameter(vobName);
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
         if (!vob)
-            cmd << "No Vob found with specified name: " << vobName << endl;
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
         else
             vob->SetVisual(NULL);
+        return 0;
+    }
+
+    int Vob_SetName()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName, newName;
+        par->GetParameter(newName);
+        par->GetParameter(vobName);
+        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        if (!vob)
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
+        else
+            vob->SetVobName(newName);
+        return 0;
+    }
+
+    int Mob_SetMisc()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING mobName, triggerTarget, useWithItem, onStateFuncName;
+        par->GetParameter(onStateFuncName);
+        par->GetParameter(useWithItem);
+        par->GetParameter(triggerTarget);
+        par->GetParameter(mobName);
+        oCMobContainer* mob = dynamic_cast<oCMobContainer*>(ogame->GetWorld()->SearchVobByName(mobName));
+        if (!mob)
+            cmd << "No Mob found with specified Vobname: " << mobName << endl;
+        else
+            mob->SetUseWithItem(useWithItem);
+        return 0;
+    }
+
+    int Mob_SetLockable()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING mobName, keyInstance, pickLockStr;
+        BOOL isLocked;
+        par->GetParameter(isLocked);
+        par->GetParameter(pickLockStr);
+        par->GetParameter(keyInstance);
+        par->GetParameter(mobName);
+        oCMobContainer* mob = dynamic_cast<oCMobContainer*>(ogame->GetWorld()->SearchVobByName(mobName));
+        if (!mob)
+            cmd << "No Mob found with specified Vobname: " << mobName << endl;
+        else
+        {
+            mob->SetKeyInstance(keyInstance);
+            mob->SetPickLockStr(pickLockStr);
+            mob->SetLocked(isLocked);
+        }
         return 0;
     }
 }
