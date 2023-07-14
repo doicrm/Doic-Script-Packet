@@ -172,4 +172,18 @@ namespace GOTHIC_ENGINE {
         }
         return 0;
     }
+
+    int Mob_FillItems()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING mobName, contents;
+        par->GetParameter(contents);
+        par->GetParameter(mobName);
+        oCMobContainer* mob = dynamic_cast<oCMobContainer*>(ogame->GetWorld()->SearchVobByName(mobName));
+        if (!mob)
+            cmd << "No Mob found with specified Vobname: " << mobName << endl;
+        else
+            mob->CreateContents(contents);
+        return 0;
+    }
 }
