@@ -51,13 +51,12 @@ namespace GOTHIC_ENGINE {
     {
         zCParser* par = zCParser::GetParser();
         zSTRING vobName, visualName;
-        BOOL collDet = FALSE;
-        BOOL isSetOnFloor = FALSE;
+        BOOL isCollDet, isSetOnFloor;
         par->GetParameter(isSetOnFloor);
-        par->GetParameter(collDet);
-        par->GetParameter(visualName); 
-        par->GetParameter(vobName);
+        par->GetParameter(isCollDet);
+        par->GetParameter(visualName);
         C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        par->GetParameter(vobName);
         zVEC3 pos = zVEC3(
             (float)vobPosition->X,
             (float)vobPosition->Y,
@@ -71,7 +70,7 @@ namespace GOTHIC_ENGINE {
         ogame->GetGameWorld()->AddVob(vob);
         if (isSetOnFloor)
             vob->SetOnFloor(pos);
-        vob->SetCollDet(collDet);
+        vob->SetCollDet(isCollDet);
         vob->SetPhysicsEnabled(TRUE);
         vob->SetSleeping(TRUE);
         vob->Release();
