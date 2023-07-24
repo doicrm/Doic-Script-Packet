@@ -117,13 +117,4 @@ namespace GOTHIC_ENGINE {
 
         return 0;
     }
-
-    int Npc_IsInWorld()
-    {
-        zCParser* par = zCParser::GetParser();
-        oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
-        BOOL result = npc && npc->GetHomeWorld() == ogame->GetGameWorld();
-        par->SetReturn(result);
-        return 0;
-    }
 }

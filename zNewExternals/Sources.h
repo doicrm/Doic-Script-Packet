@@ -5,6 +5,7 @@
 #pragma region Includes
 #include "zExternals.cpp"
 #include "zExternals_Vobs.cpp"
+#include "zExternals_Npcs.cpp"
 #include "Plugin.cpp"
 #pragma endregion
 
