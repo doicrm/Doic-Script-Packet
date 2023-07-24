@@ -23,7 +23,6 @@ namespace GOTHIC_ENGINE {
         zCParser* par = zCParser::GetParser();
         zCVob* vob = (zCVob*)par->GetInstance();
         zVEC3 pos = vob->GetPositionWorld();
-
         vobPosition.X = (int)pos[VX];
         vobPosition.Y = (int)pos[VY];
         vobPosition.Z = (int)pos[VZ];
@@ -38,12 +37,10 @@ namespace GOTHIC_ENGINE {
         C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         zCVob* vob = (zCVob*)par->GetInstance();
         cmd << string::Combine("%x %x", vobPosition, vob) << endl;
-
         vob->SetPositionWorld(zVEC3(
             (float)vobPosition->X,
             (float)vobPosition->Y,
             (float)vobPosition->Z));
-
         return 0;
     }
 
@@ -132,57 +129,6 @@ namespace GOTHIC_ENGINE {
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
         else
             vob->SetVobName(newName);
-        return 0;
-    }
-
-    int Mob_SetMisc()
-    {
-        zCParser* par = zCParser::GetParser();
-        zSTRING mobName, triggerTarget, useWithItem, onStateFuncName;
-        par->GetParameter(onStateFuncName);
-        par->GetParameter(useWithItem);
-        par->GetParameter(triggerTarget);
-        par->GetParameter(mobName);
-        oCMobContainer* mob = dynamic_cast<oCMobContainer*>(ogame->GetWorld()->SearchVobByName(mobName));
-        if (!mob)
-            cmd << "No Mob found with specified Vobname: " << mobName << endl;
-        else
-            mob->SetUseWithItem(useWithItem);
-        return 0;
-    }
-
-    int Mob_SetLockable()
-    {
-        zCParser* par = zCParser::GetParser();
-        zSTRING mobName, keyInstance, pickLockStr;
-        BOOL isLocked;
-        par->GetParameter(isLocked);
-        par->GetParameter(pickLockStr);
-        par->GetParameter(keyInstance);
-        par->GetParameter(mobName);
-        oCMobContainer* mob = dynamic_cast<oCMobContainer*>(ogame->GetWorld()->SearchVobByName(mobName));
-        if (!mob)
-            cmd << "No Mob found with specified Vobname: " << mobName << endl;
-        else
-        {
-            mob->SetKeyInstance(keyInstance);
-            mob->SetPickLockStr(pickLockStr);
-            mob->SetLocked(isLocked);
-        }
-        return 0;
-    }
-
-    int Mob_FillItems()
-    {
-        zCParser* par = zCParser::GetParser();
-        zSTRING mobName, contents;
-        par->GetParameter(contents);
-        par->GetParameter(mobName);
-        oCMobContainer* mob = dynamic_cast<oCMobContainer*>(ogame->GetWorld()->SearchVobByName(mobName));
-        if (!mob)
-            cmd << "No Mob found with specified Vobname: " << mobName << endl;
-        else
-            mob->CreateContents(contents);
         return 0;
     }
 }
