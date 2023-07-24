@@ -2,27 +2,44 @@
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
-	int Npc_IsInRoutineName()
+
+	int Npc_GetRoutineName() // FIXME: Wartoœæ string nie jest wyœwietlana w grze
 	{
 		zCParser* par = zCParser::GetParser();
 		zSTRING routine;
-		par->GetParameter(routine);
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
-		oCNpc_States* npcStates = nullptr;
-		npcStates->npc = npc;
-
 		if (npc)
 		{
-			routine = npcStates->GetRoutineName();
+			oCNpc_States* npcStates = &npc->state;
+			if (npcStates)
+				routine = npcStates->GetRoutineName();
+		}
+		par->SetReturn(routine);
+		return 0;
+	}
 
-			if (routine) {
+	int Npc_IsInRoutineName()
+	{
+		zCParser* par = zCParser::GetParser();
+		zSTRING routine, currentRoutine;
+		BOOL result = false;
+		par->GetParameter(routine);
+		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
+		if (npc)
+		{
+			oCNpc_States* npcStates = &npc->state;
+			if (npcStates)
+			{
+				currentRoutine = npcStates->GetRoutineName();
 				routine = routine.Upper();
-				par->SetReturn(routine);
-				return 0;
+				if (!routine.StartWith("RTN_"))
+					routine = "RTN_" + routine;
+				if (!routine.EndWith("_" + (zSTRING)npc->idx))
+					routine = routine + "_" + (zSTRING)npc->idx;
+				result = currentRoutine == routine;
 			}
 		}
-
-		par->SetReturn("");
+		par->SetReturn(result);
 		return 0;
 	}
 
@@ -30,7 +47,9 @@ namespace GOTHIC_ENGINE {
 	{
 		zCParser* par = zCParser::GetParser();
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
-		BOOL result = npc && npc->GetHomeWorld() == ogame->GetGameWorld();
+		BOOL result = false;
+		if (npc)
+			result = npc->GetHomeWorld() == ogame->GetGameWorld();
 		par->SetReturn(result);
 		return 0;
 	}
