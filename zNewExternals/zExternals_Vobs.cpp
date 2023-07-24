@@ -44,32 +44,37 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    int Wld_InsertVob()
+    int Wld_InsertVob() // On WPs or FPs
     {
         zCParser* par = zCParser::GetParser();
-        zSTRING vobName, visualName;
+        zSTRING point, vobName, visualName;
         BOOL isCollDet, isSetOnFloor;
         par->GetParameter(isSetOnFloor);
         par->GetParameter(isCollDet);
         par->GetParameter(visualName);
-        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        par->GetParameter(point);
         par->GetParameter(vobName);
-        zVEC3 pos = zVEC3(
-            (float)vobPosition->X,
-            (float)vobPosition->Y,
-            (float)vobPosition->Z);
         oCVob* vob = new oCVob();
-        if (!vob)
-            return 0;
+        zVEC3 pos;
+        zCWaypoint* wp = ogame->GetWorld()->wayNet->GetWaypoint(point);
+        if (wp)
+            pos = wp->GetPositionWorld();
+        else
+        {
+            zCVob* pVob = ogame->GetGameWorld()->SearchVobByName(point);
+            if (pVob)
+                pos = pVob->GetPositionWorld();
+        }
+        vob->SetVobName(vobName);
         vob->SetPositionWorld(pos);
         vob->SetVisual(visualName);
-        vob->SetCollDet(FALSE);
+        vob->SetCollDet(0);
         ogame->GetGameWorld()->AddVob(vob);
         if (isSetOnFloor)
             vob->SetOnFloor(pos);
         vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(TRUE);
-        vob->SetSleeping(TRUE);
+        vob->SetPhysicsEnabled(1);
+        vob->SetSleeping(1);
         vob->Release();
         return 0;
     }
