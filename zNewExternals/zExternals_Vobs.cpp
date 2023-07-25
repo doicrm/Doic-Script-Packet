@@ -79,6 +79,35 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Wld_InsertVobPos()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName, visualName;
+        BOOL isCollDet, isSetOnFloor;
+        par->GetParameter(isSetOnFloor);
+        par->GetParameter(isCollDet);
+        par->GetParameter(visualName);
+        C_POSITION* vobPos = (C_POSITION*)par->GetInstance();
+        par->GetParameter(vobName);
+        zVEC3 pos = zVEC3(
+            (float)vobPos->X,
+            (float)vobPos->Y,
+            (float)vobPos->Z);
+        oCVob* vob = new oCVob();
+        vob->SetVobName(vobName);
+        vob->SetPositionWorld(pos);
+        vob->SetVisual(visualName);
+        vob->SetCollDet(0);
+        ogame->GetGameWorld()->AddVob(vob);
+        if (isSetOnFloor)
+            vob->SetOnFloor(pos);
+        vob->SetCollDet(isCollDet);
+        vob->SetPhysicsEnabled(1);
+        vob->SetSleeping(1);
+        vob->Release();
+        return 0;
+    }
+
     int Wld_RemoveVob()
     {
         zCParser* par = zCParser::GetParser();

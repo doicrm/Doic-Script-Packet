@@ -91,6 +91,8 @@ namespace GOTHIC_ENGINE {
 
         // func void Wld_InsertVob (var string vobName, var string point, var string visualName, var int isCollDet, var int isSetOnFloor)
         parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+        // func void Wld_InsertVobPos (var string vobName, var C_Position pos, var string visualName, var int isCollDet, var int isSetOnFloor)
+        parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         // func int Wld_RemoveVob (var string vobName)
         parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
         parser->DefineExternal("Vob_GetPos", Vob_GetPos, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
