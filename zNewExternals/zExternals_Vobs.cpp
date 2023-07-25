@@ -143,7 +143,9 @@ namespace GOTHIC_ENGINE {
         zSTRING vobName;
         par->GetParameter(vobName);
         zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
-        par->SetReturn(&vob);
+        if (vob)
+            par->SetReturn(&vob); return 0;
+        par->SetReturn(-1);
         return 0;
     }
 }
