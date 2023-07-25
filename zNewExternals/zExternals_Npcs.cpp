@@ -3,7 +3,7 @@
 
 namespace GOTHIC_ENGINE {
 
-	int Npc_GetRoutineName() // FIXME: Wartoœæ string nie jest wyœwietlana w grze
+	int Npc_GetRoutineName() // FIXME: Doesn't return routine's name correctly!
 	{
 		zCParser* par = zCParser::GetParser();
 		zSTRING routine;
@@ -12,9 +12,13 @@ namespace GOTHIC_ENGINE {
 		{
 			oCNpc_States* npcStates = &npc->state;
 			if (npcStates)
+			{
 				routine = npcStates->GetRoutineName();
+				par->SetReturn(routine);
+				return 0;
+			}
 		}
-		par->SetReturn(routine);
+		par->SetReturn("");
 		return 0;
 	}
 
