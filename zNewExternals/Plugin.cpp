@@ -89,7 +89,7 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
 
-        // func void Wld_InsertVob (var string vobName, var string point, var string visualName, var int isCollDet, var int isSetOnFloor) 
+        // func void Wld_InsertVob (var string vobName, var string point, var string visualName, var int isCollDet, var int isSetOnFloor)
         parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         // func int Wld_RemoveVob (var string vobName)
         parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
@@ -101,6 +101,8 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Vob_ClearVisual", Vob_ClearVisual, zPAR_TYPE_VOID, zPAR_TYPE_STRING, 0);
         // func void Vob_SetName (var string oldVobName, var string newVobName)
         parser->DefineExternal("Vob_SetName", Vob_SetName, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        // func void Vob_SearchByName (var string vobName)
+        parser->DefineExternal("Vob_SearchByName", Vob_SearchByName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
 
         parser->DefineExternal("ReadStatIntArray", Ext_ReadStatArray<int>, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         parser->DefineExternal("ReadStatStringArray", Ext_ReadStatArray<zSTRING>, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);

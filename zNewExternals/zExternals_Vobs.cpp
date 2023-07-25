@@ -136,4 +136,14 @@ namespace GOTHIC_ENGINE {
             vob->SetVobName(newName);
         return 0;
     }
+
+    int Vob_SearchByName()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING vobName;
+        par->GetParameter(vobName);
+        zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
+        par->SetReturn(&vob);
+        return 0;
+    }
 }
