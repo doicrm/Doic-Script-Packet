@@ -47,6 +47,17 @@ namespace GOTHIC_ENGINE {
 		return 0;
 	}
 
+	int Npc_GetSlotItem()
+	{
+		zCParser* par = zCParser::GetParser();
+		zSTRING slot;
+		par->GetParameter(slot);
+		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
+		oCItem* item = npc->GetSlotItem(slot);
+		item ? par->SetReturn(item) : par->SetReturn(-1);
+		return 0;
+	}
+
 	int Npc_IsInWorld()
 	{
 		zCParser* par = zCParser::GetParser();
