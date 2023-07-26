@@ -85,8 +85,10 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Npc_GetRoutineName", Npc_GetRoutineName, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, 0);
         // func int Npc_IsInRoutineName (var C_NPC npc, var string routine)
         parser->DefineExternal("Npc_IsInRoutineName", Npc_IsInRoutineName, zPAR_TYPE_INT, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
-        // func int Npc_GetSlotItem (var int ptr) 
+        // func int Npc_GetSlotItem (var C_NPC slf)
         parser->DefineExternal("Npc_GetSlotItem", Npc_GetSlotItem, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+        // func int Npc_EquipItem (var C_NPC slf, var C_Item itm)
+        parser->DefineExternal("Npc_EquipItem", Npc_EquipItem, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
 
         parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);

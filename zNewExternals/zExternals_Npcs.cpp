@@ -58,6 +58,15 @@ namespace GOTHIC_ENGINE {
 		return 0;
 	}
 
+	int Npc_EquipItem()
+	{
+		zCParser* par = zCParser::GetParser();
+		oCItem* item = (oCItem*)par->GetInstance();
+		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
+		npc->Equip(item);
+		return 0;
+	}
+
 	int Npc_IsInWorld()
 	{
 		zCParser* par = zCParser::GetParser();
