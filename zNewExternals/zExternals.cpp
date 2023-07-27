@@ -13,13 +13,13 @@ namespace GOTHIC_ENGINE {
         auto* list = &logs.m_lstTopics;
         while (list)
         {
-            auto topic = list->data;
+            auto topic = list->GetData();
             if (topic && topic->m_strDescription == value)
             {
                 par->SetReturn(topic->m_enuStatus);
                 return 0;
             }
-            list = list->next;
+            list = list->GetNextInList();
         }
 
         par->SetReturn(-1);

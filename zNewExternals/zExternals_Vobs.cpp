@@ -120,11 +120,11 @@ namespace GOTHIC_ENGINE {
         if (!vob)
         {
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
-            par->SetReturn(FALSE);
+            par->SetReturn(0);
             return 0;
         }
         ogame->GetGameWorld()->RemoveVob(vob);
-        par->SetReturn(TRUE);
+        par->SetReturn(1);
         return 0;
     }
 
