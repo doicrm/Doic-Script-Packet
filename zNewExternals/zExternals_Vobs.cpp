@@ -92,10 +92,7 @@ namespace GOTHIC_ENGINE {
         par->GetParameter(posy);
         par->GetParameter(posx);
         par->GetParameter(vobName);
-        zVEC3 pos = zVEC3(
-            (float)posx,
-            (float)posy,
-            (float)posz);
+        zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
         oCVob* vob = new oCVob();
         vob->SetVobName(vobName);
         vob->SetPositionWorld(pos);

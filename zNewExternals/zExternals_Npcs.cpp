@@ -7,7 +7,7 @@ namespace GOTHIC_ENGINE {
 	{
 		zCParser* par = zCParser::GetParser();
 		zSTRING routine;
-		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
+		oCNpc* npc = (oCNpc*)par->GetInstance();
 		if (npc)
 		{
 			oCNpc_States* npcStates = &npc->state;
@@ -28,7 +28,7 @@ namespace GOTHIC_ENGINE {
 		zSTRING routine, currentRoutine;
 		BOOL result = false;
 		par->GetParameter(routine);
-		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
+		oCNpc* npc = (oCNpc*)par->GetInstance();
 		if (npc)
 		{
 			oCNpc_States* npcStates = &npc->state;
@@ -47,14 +47,16 @@ namespace GOTHIC_ENGINE {
 		return 0;
 	}
 
+	// by Gratt from zParserExtender
 	int Npc_GetSlotItem()
 	{
 		zCParser* par = zCParser::GetParser();
-		zSTRING slot;
-		par->GetParameter(slot);
-		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
-		oCItem* item = npc->GetSlotItem(slot);
-		item ? par->SetReturn(item) : par->SetReturn(-1);
+		oCNpc* npc;
+		zSTRING slotName;
+		par->GetParameter(slotName);
+		npc = (oCNpc*)par->GetInstance();
+		oCItem* item = npc->GetSlotItem(slotName.Upper())->CastTo<oCItem>();
+		par->SetReturn(item);
 		return 0;
 	}
 
@@ -62,7 +64,7 @@ namespace GOTHIC_ENGINE {
 	{
 		zCParser* par = zCParser::GetParser();
 		oCItem* item = (oCItem*)par->GetInstance();
-		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
+		oCNpc* npc = (oCNpc*)par->GetInstance();
 		npc->Equip(item);
 		return 0;
 	}
