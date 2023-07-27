@@ -82,17 +82,20 @@ namespace GOTHIC_ENGINE {
     int Wld_InsertVobPos()
     {
         zCParser* par = zCParser::GetParser();
+        int posx, posy, posz;
         zSTRING vobName, visualName;
         BOOL isCollDet, isSetOnFloor;
         par->GetParameter(isSetOnFloor);
         par->GetParameter(isCollDet);
         par->GetParameter(visualName);
-        C_POSITION* vobPos = (C_POSITION*)par->GetInstance();
+        par->GetParameter(posz);
+        par->GetParameter(posy);
+        par->GetParameter(posx);
         par->GetParameter(vobName);
         zVEC3 pos = zVEC3(
-            (float)vobPos->X,
-            (float)vobPos->Y,
-            (float)vobPos->Z);
+            (float)posx,
+            (float)posy,
+            (float)posz);
         oCVob* vob = new oCVob();
         vob->SetVobName(vobName);
         vob->SetPositionWorld(pos);
