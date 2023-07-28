@@ -70,6 +70,16 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Wld_GetPlayerPortalName()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING portalName;
+        oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
+        portalName = portal->curPlayerRoom->GetPortalName();
+        par->SetReturn(portalName);
+        return 0;
+    }
+
     // by Boguś
     template<typename T>
     int Ext_ReadStatArray()
