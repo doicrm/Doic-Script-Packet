@@ -77,7 +77,8 @@ namespace GOTHIC_ENGINE {
         zSTRING portalName;
         par->GetParameter(portalName);
         oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
-        result = portal->curPlayerRoom->GetPortalName() == portalName;
+        if (portal->curPlayerPortal)
+            result = portal->curPlayerPortal == portalName;
         par->SetReturn(result);
         return 0;
     }
