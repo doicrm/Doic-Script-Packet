@@ -888,6 +888,10 @@ $(ALLUSERSPROFILE)\Union\SDK\Union\v1.0m\Build\incver.exe $(ProjectDir)</Command
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="zExternals_AI.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="zExternals_Npcs.cpp">
       <SubType>
       </SubType>

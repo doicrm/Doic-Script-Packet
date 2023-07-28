@@ -113,6 +113,11 @@ namespace GOTHIC_ENGINE {
         // func string Wld_GetPlayerPortalName ()
         parser->DefineExternal("Wld_GetPlayerPortalName", Wld_GetPlayerPortalName, zPAR_TYPE_STRING, 0);
 
+        // func string AI_TurnToWP (var C_NPC npc, var string wp)
+        parser->DefineExternal("AI_TurnToWP", AI_TurnToWP, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+        // func string AI_TurnToVob (var C_NPC npc, var string vobName)
+        parser->DefineExternal("AI_TurnToVob", AI_TurnToVob, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+
         parser->DefineExternal("ReadStatIntArray", Ext_ReadStatArray<int>, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         parser->DefineExternal("ReadStatStringArray", Ext_ReadStatArray<zSTRING>, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
         parser->DefineExternal("WriteStatIntArray", Ext_WriteStatArray<int>, zPAR_TYPE_VOID, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);

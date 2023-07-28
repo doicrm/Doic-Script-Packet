@@ -2790,6 +2790,9 @@
     <ClInclude Include="zExternals_Npcs.cpp">
       <Filter>Plugin\zNewExternals</Filter>
     </ClInclude>
+    <ClInclude Include="zExternals_AI.cpp">
+      <Filter>Plugin\zNewExternals</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".build_settings.inl">
