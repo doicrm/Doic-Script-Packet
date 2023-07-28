@@ -73,10 +73,12 @@ namespace GOTHIC_ENGINE {
     int Wld_GetPlayerPortalName()
     {
         zCParser* par = zCParser::GetParser();
+        BOOL result = false;
         zSTRING portalName;
+        par->GetParameter(portalName);
         oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
-        portalName = portal->curPlayerRoom->GetPortalName();
-        par->SetReturn(portalName);
+        result = portal->curPlayerRoom->GetPortalName() == portalName;
+        par->SetReturn(result);
         return 0;
     }
 
