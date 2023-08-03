@@ -86,6 +86,16 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Wld_UpdateCurrentWorldMesh()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING meshName;
+        par->GetParameter(meshName);
+        /*ogame->GetGameWorld()->SaveBspTreeMesh3DS(meshName);*/
+        ogame->GetGameWorld()->SearchVobByName("WORLD_COMPO")->SetVisual(meshName);
+        return 0;
+    }
+
     // by Boguś
     template<typename T>
     int Ext_ReadStatArray()
