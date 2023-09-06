@@ -86,41 +86,22 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    int Wld_UpdateCurrentWorldMesh()
-    {
-        zCParser* par = zCParser::GetParser();
-        zSTRING meshName;
-        par->GetParameter(meshName);
-        /*ogame->GetGameWorld()->SaveBspTreeMesh3DS(meshName);*/
-        ogame->GetGameWorld()->SearchVobByName("WORLD_COMPO")->SetVisual(meshName);
-        return 0;
-    }
-
     // by Boguś
     template<typename T>
     int Ext_ReadStatArray()
     {
         auto par = zCParser::GetParser();
-
         int idx; par->GetParameter(idx);
-
         static T ele; ele = T{};
-
         if (idx < 0)
         {
             par->SetReturn(ele);
             return 0;
         }
-
         const auto array = reinterpret_cast<T*>(par->PopVarAddress());
-
         if (array)
-        {
             ele = array[idx];
-        }
-
         par->SetReturn(ele);
-
         return 0;
     }
 
@@ -129,18 +110,12 @@ namespace GOTHIC_ENGINE {
     int Ext_WriteStatArray()
     {
         auto par = zCParser::GetParser();
-
         T value; par->GetParameter(value);
         int idx; par->GetParameter(idx);
         if (idx < 0) return 0;
-
         auto array = reinterpret_cast<T*>(par->PopVarAddress());
-
         if (array)
-        {
             array[idx] = value;
-        }
-
         return 0;
     }
 }
