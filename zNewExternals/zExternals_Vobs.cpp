@@ -79,6 +79,50 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Vob_MoveToWP() // To WPs or FPs
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING point, vobName;
+        par->GetParameter(point);
+        par->GetParameter(vobName);
+        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        zVEC3 pos;
+        zCWaypoint* wp = ogame->GetWorld()->wayNet->GetWaypoint(point);
+        if (wp)
+            pos = wp->GetPositionWorld();
+        else
+        {
+            zCVob* pVob = ogame->GetGameWorld()->SearchVobByName(point);
+            if (pVob)
+                pos = pVob->GetPositionWorld();
+        }
+        vob->SetCollDet(0);
+        vob->SetPhysicsEnabled(0);
+        vob->SetPositionWorld(pos);
+        vob->SetCollDet(1);
+        vob->SetPhysicsEnabled(1);
+        return 0;
+    }
+
+    int Vob_MoveToPos()
+    {
+        zCParser* par = zCParser::GetParser();
+        int posx, posy, posz;
+        zSTRING point, vobName;
+        par->GetParameter(posz);
+        par->GetParameter(posy);
+        par->GetParameter(posx);
+        par->GetParameter(vobName);
+        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
+        vob->SetCollDet(0);
+        vob->SetPhysicsEnabled(0);
+        vob->SetPositionWorld(pos);
+        vob->SetCollDet(1);
+        vob->SetPhysicsEnabled(1);
+        return 0;
+    }
+
     int Wld_InsertVobPos()
     {
         zCParser* par = zCParser::GetParser();

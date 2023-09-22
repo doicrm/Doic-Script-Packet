@@ -118,4 +118,21 @@ namespace GOTHIC_ENGINE {
             array[idx] = value;
         return 0;
     }
+
+    int Wld_SetRainTime()
+    {
+        zCParser* par = zCParser::GetParser();
+        float startTime, endTime;
+        par->GetParameter(endTime);
+        par->GetParameter(startTime);
+        oCWorld* world = ogame->GetGameWorld();
+        zCSkyControler_Outdoor* controller = world->GetActiveSkyControler()->CastTo<zCSkyControler_Outdoor>();
+        if (controller)
+        {
+            controller->rainFX.timeStartRain = startTime;
+            controller->rainFX.timeStopRain = endTime;
+            cmd << "zWld_SetRainTime: Rain starts on " << startTime << " and ends on " << endTime << endl;
+        }
+        return 0;
+    }
 }
