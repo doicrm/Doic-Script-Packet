@@ -3,10 +3,10 @@
 
 // Automatically generated block
 #pragma region Includes
-#include "zExternals.cpp"
-#include "zExternals_Vobs.cpp"
-#include "zExternals_Npcs.cpp"
-#include "zExternals_AI.cpp"
+#include "Externals.cpp"
+#include "Externals_Vobs.cpp"
+#include "Externals_Npcs.cpp"
+#include "Externals_AI.cpp"
 #include "Plugin.cpp"
 #pragma endregion
 
