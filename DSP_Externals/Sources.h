@@ -7,6 +7,7 @@
 #include "Externals_Vobs.cpp"
 #include "Externals_Npcs.cpp"
 #include "Externals_AI.cpp"
+#include "Hooks.cpp"
 #include "Plugin.cpp"
 #pragma endregion
 
