@@ -77,9 +77,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0a1d1aa9-3feb-4d09-8869-f9caf364023c}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>zNewExternals</RootNamespace>
+    <RootNamespace>DSP_Externals</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>zNewExternals</ProjectName>
+    <ProjectName>DSP_Externals</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MP x4 Debug|Win32'" Label="Configuration">
@@ -884,19 +884,19 @@ $(ALLUSERSPROFILE)\Union\SDK\Union\v1.0m\Build\incver.exe $(ProjectDir)</Command
     <ClCompile Include="ZenGin\Gothic_I_Classic\ClassDeclarators_G1.cpp" />
     <ClCompile Include="ZenGin\Gothic_I_Classic\Globals_G1.cpp" />
     <ClCompile Include="ZenGin\Gothic_I_Classic\Statics_G1.cpp" />
-    <ClInclude Include="zExternals.cpp">
+    <ClInclude Include="Externals.cpp">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="zExternals_AI.cpp">
+    <ClInclude Include="Externals_AI.cpp">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="zExternals_Npcs.cpp">
+    <ClInclude Include="Externals_Npcs.cpp">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="zExternals_Vobs.cpp">
+    <ClInclude Include="Externals_Vobs.cpp">
       <SubType>
       </SubType>
     </ClInclude>

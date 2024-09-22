@@ -214,7 +214,7 @@
     <Filter Include="Engine SDK\4. Gothic II NoTR\Overloads">
       <UniqueIdentifier>{225cc81e-eae0-432b-9f39-e93512644977}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugin\zNewExternals">
+    <Filter Include="Plugin\Externals">
       <UniqueIdentifier>{ff80a383-ed52-4bb4-915f-7b316faea38e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -2781,17 +2781,17 @@
       <Filter>Plugin\Workspace\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="zExternals.cpp">
-      <Filter>Plugin\zNewExternals</Filter>
+    <ClInclude Include="Externals_Vobs.cpp">
+      <Filter>Plugin\Externals</Filter>
     </ClInclude>
-    <ClInclude Include="zExternals_Vobs.cpp">
-      <Filter>Plugin\zNewExternals</Filter>
+    <ClInclude Include="Externals.cpp">
+      <Filter>Plugin\Externals</Filter>
     </ClInclude>
-    <ClInclude Include="zExternals_Npcs.cpp">
-      <Filter>Plugin\zNewExternals</Filter>
+    <ClInclude Include="Externals_AI.cpp">
+      <Filter>Plugin\Externals</Filter>
     </ClInclude>
-    <ClInclude Include="zExternals_AI.cpp">
-      <Filter>Plugin\zNewExternals</Filter>
+    <ClInclude Include="Externals_Npcs.cpp">
+      <Filter>Plugin\Externals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
