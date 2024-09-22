@@ -118,4 +118,19 @@ namespace GOTHIC_ENGINE {
             array[idx] = value;
         return 0;
     }
+
+    int Menu_SetItemText()
+    {
+        zCParser* par = zCParser::GetParser();
+        zSTRING menuItemName, menuItemText;
+        par->GetParameter(menuItemText);
+        par->GetParameter(menuItemName);
+        zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName.Upper());
+        if (!menuItem) {
+            cmd << "Menu_SetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
+            return 0;
+        };
+        menuItem->SetText(menuItemText, 0, 1);
+        return 0;
+    }
 }

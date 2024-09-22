@@ -78,14 +78,21 @@ namespace GOTHIC_ENGINE {
     void Game_DefineExternals() {
 
         //---------------------------------------------------------------------
-        // LOG functions
+        // MENU
+        //---------------------------------------------------------------------
+
+        // func void Menu_SetItemText(var string menuItemName, var int value)
+        parser->DefineExternal("Menu_SetItemText", Menu_SetItemText, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+
+        //---------------------------------------------------------------------
+        // LOG
         //---------------------------------------------------------------------
  
         // func int Log_GetTopicStatus(var string logName) 
         parser->DefineExternal("Log_GetTopicStatus", Log_GetTopicStatus, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
 
         //---------------------------------------------------------------------
-        // NPC functions
+        // NPC
         //---------------------------------------------------------------------
 
         // func int Npc_IsInWorld(var C_NPC npc)
@@ -100,7 +107,7 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Npc_EquipItem", Npc_EquipItem, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
 
         //---------------------------------------------------------------------
-        // WLD functions
+        // WLD
         //---------------------------------------------------------------------
 
         parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
@@ -109,7 +116,7 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Wld_GetPlayerPortalName", Wld_GetPlayerPortalName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
 
         //---------------------------------------------------------------------
-        // VOB functions
+        // VOB
         //---------------------------------------------------------------------
 
         // func void Wld_InsertVob(var string vobName, var string point, var string visualName, var int isCollDet, var int isSetOnFloor)
@@ -134,7 +141,7 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Vob_SearchByName", Vob_SearchByName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
 
         //---------------------------------------------------------------------
-        // AI functions
+        // AI
         //---------------------------------------------------------------------
 
         // func string AI_TurnToWP(var C_NPC npc, var string wp)
@@ -143,7 +150,7 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("AI_TurnToVob", AI_TurnToVob, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
 
         //---------------------------------------------------------------------
-        // Other functions
+        // Other
         //---------------------------------------------------------------------
 
         parser->DefineExternal("ReadStatIntArray", Ext_ReadStatArray<int>, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
