@@ -16,6 +16,8 @@ namespace GOTHIC_ENGINE {
     }
 
     void Game_Loop() {
+        // TODO!!!
+        //screen->Print(200, 200, "WORK IN PROGRESS");
     }
 
     void Game_PostLoop() {
@@ -114,6 +116,8 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         // func int Wld_GetPlayerPortalName(var string portalName)
         parser->DefineExternal("Wld_GetPlayerPortalName", Wld_GetPlayerPortalName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+        // func int Wld_GetCurrentWorldName() 
+        parser->DefineExternal("Wld_GetCurrentWorldName", Wld_GetCurrentWorldName, zPAR_TYPE_STRING, 0);
 
         //---------------------------------------------------------------------
         // VOB

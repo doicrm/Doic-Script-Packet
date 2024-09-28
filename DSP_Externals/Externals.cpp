@@ -86,6 +86,13 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Wld_GetCurrentWorldName()
+    {
+        zCParser* par = zCParser::GetParser();
+        par->SetReturn(ogame->GetGameWorld()->GetWorldName());
+        return 0;
+    }
+
     // by Boguś
     template<typename T>
     int Ext_ReadStatArray()
@@ -130,7 +137,8 @@ namespace GOTHIC_ENGINE {
             cmd << "Menu_SetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
             return 0;
         };
-        menuItem->SetText(menuItemText, 0, 1);
+        menuItem->SetText(menuItemText, 0, 0);
+        menuItem->Release();
         return 0;
     }
 }

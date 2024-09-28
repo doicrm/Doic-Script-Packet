@@ -3,7 +3,7 @@
 
 namespace GOTHIC_ENGINE {
 
-	int AI_TurnToWP ()
+	int AI_TurnToWP()
 	{
 		zCParser* par = zCParser::GetParser();
 		zSTRING point;

@@ -213,8 +213,6 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-
-
     int Wld_InsertMob() // On WPs or FPs
     {
         zCParser* par = zCParser::GetParser();

@@ -6,19 +6,15 @@ namespace GOTHIC_ENGINE {
 	int Npc_GetRoutineName() // FIXME: Doesn't return routine's name correctly!
 	{
 		zCParser* par = zCParser::GetParser();
-		zSTRING routine;
+		zSTRING routine = "";
 		oCNpc* npc = (oCNpc*)par->GetInstance();
 		if (npc)
 		{
 			oCNpc_States* npcStates = &npc->state;
 			if (npcStates)
-			{
 				routine = npcStates->GetRoutineName();
-				par->SetReturn(routine);
-				return 0;
-			}
 		}
-		par->SetReturn("");
+		par->SetReturn(routine);
 		return 0;
 	}
 
@@ -75,7 +71,7 @@ namespace GOTHIC_ENGINE {
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
 		BOOL result = false;
 		if (npc)
-			result = npc->GetHomeWorld() == ogame->GetGameWorld();
+			result = npc->GetHomeWorld()->GetObjectName() == ogame->GetGameWorld()->GetObjectName();
 		par->SetReturn(result);
 		return 0;
 	}

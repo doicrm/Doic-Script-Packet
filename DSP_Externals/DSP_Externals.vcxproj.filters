@@ -261,18 +261,6 @@
     <ClCompile Include="ZenGin\Gothic_II_Addon\Statics_G2A.cpp">
       <Filter>Engine SDK\4. Gothic II NoTR\Overloads</Filter>
     </ClCompile>
-    <ClCompile Include="Externals.cpp">
-      <Filter>Plugin\Externals</Filter>
-    </ClCompile>
-    <ClCompile Include="Externals_AI.cpp">
-      <Filter>Plugin\Externals</Filter>
-    </ClCompile>
-    <ClCompile Include="Externals_Npcs.cpp">
-      <Filter>Plugin\Externals</Filter>
-    </ClCompile>
-    <ClCompile Include="Externals_Vobs.cpp">
-      <Filter>Plugin\Externals</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZenGin\zGothicAPI.h">
@@ -2793,6 +2781,11 @@
       <Filter>Plugin\Workspace\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Hooks.cpp" />
+    <ClInclude Include="Externals.cpp" />
+    <ClInclude Include="Externals_AI.cpp" />
+    <ClInclude Include="Externals_Npcs.cpp" />
+    <ClInclude Include="Externals_Vobs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".build_settings.inl">
