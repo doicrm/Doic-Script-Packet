@@ -2,7 +2,6 @@
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
-
 	int Npc_GetRoutineName() // FIXME: Doesn't return routine's name correctly!
 	{
 		zCParser* par = zCParser::GetParser();

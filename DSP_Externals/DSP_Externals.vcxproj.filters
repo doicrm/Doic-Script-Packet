@@ -214,8 +214,8 @@
     <Filter Include="Engine SDK\4. Gothic II NoTR\Overloads">
       <UniqueIdentifier>{225cc81e-eae0-432b-9f39-e93512644977}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugin\Externals">
-      <UniqueIdentifier>{ff80a383-ed52-4bb4-915f-7b316faea38e}</UniqueIdentifier>
+    <Filter Include="Plugin\Workspace\Externals">
+      <UniqueIdentifier>{7c8a4dcb-f6da-44a9-8a6b-830e867ab914}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -2781,11 +2781,18 @@
       <Filter>Plugin\Workspace\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Hooks.cpp" />
-    <ClInclude Include="Externals.cpp" />
-    <ClInclude Include="Externals_AI.cpp" />
-    <ClInclude Include="Externals_Npcs.cpp" />
-    <ClInclude Include="Externals_Vobs.cpp" />
+    <ClInclude Include="Externals.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_AI.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Npcs.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Vobs.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".build_settings.inl">

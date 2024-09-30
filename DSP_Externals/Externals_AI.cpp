@@ -2,7 +2,6 @@
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
-
 	int AI_TurnToWP()
 	{
 		zCParser* par = zCParser::GetParser();

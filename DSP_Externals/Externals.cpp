@@ -1,4 +1,4 @@
-Ôªø// Supported with union (c) 2020 Union team
+// Supported with union (c) 2020 Union team
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
@@ -77,23 +77,13 @@ namespace GOTHIC_ENGINE {
         zSTRING portalName, currentPortalName;
         par->GetParameter(portalName);
         oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
-        if (portal->curPlayerPortal)
-        {
-            currentPortalName = portal->curPlayerPortal;
-            result = currentPortalName.Upper() == portalName.Upper();
-        }
+        currentPortalName = portal->curPlayerPortal;
+        result = currentPortalName.Upper() == portalName.Upper();
         par->SetReturn(result);
         return 0;
     }
 
-    int Wld_GetCurrentWorldName()
-    {
-        zCParser* par = zCParser::GetParser();
-        par->SetReturn(ogame->GetGameWorld()->GetWorldName());
-        return 0;
-    }
-
-    // by Bogu≈õ
+    // by Boguú
     template<typename T>
     int Ext_ReadStatArray()
     {
@@ -112,7 +102,7 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    // by Bogu≈õ
+    // by Boguú
     template<typename T>
     int Ext_WriteStatArray()
     {

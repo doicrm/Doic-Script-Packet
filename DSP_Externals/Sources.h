@@ -4,10 +4,9 @@
 // Automatically generated block
 #pragma region Includes
 #include "Externals.cpp"
-#include "Externals_Vobs.cpp"
-#include "Externals_Npcs.cpp"
 #include "Externals_AI.cpp"
-#include "Hooks.cpp"
+#include "Externals_Npcs.cpp"
+#include "Externals_Vobs.cpp"
 #include "Plugin.cpp"
 #pragma endregion
 
