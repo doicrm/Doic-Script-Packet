@@ -25,9 +25,9 @@ namespace GOTHIC_ENGINE {
 
   void Game_Loop() {
       if (showWIP)
-          screen->Print(200, 200, "WORK IN PROGRESS");
+          screen->PrintCX(8000, "WORK IN PROGRESS");
       if (showCurrentWorldName)
-          screen->Print(200, 400, ogame->GetGameWorld()->GetWorldName() + ".ZEN");
+          screen->Print(100, 500, ogame->GetGameWorld()->GetWorldName() + ".ZEN");
   }
 
   void Game_PostLoop() {
