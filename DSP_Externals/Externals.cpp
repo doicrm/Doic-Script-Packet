@@ -128,7 +128,10 @@ namespace GOTHIC_ENGINE {
             return 0;
         };
         menuItem->SetText(menuItemText, 0, 0);
+
+#if ENGINE > Engine_G1A
         menuItem->Release();
+#endif
         return 0;
     }
 }
