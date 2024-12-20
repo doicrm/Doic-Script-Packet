@@ -21,15 +21,15 @@ jobs:
 
       - name: Compile DSP_Hooks
         run: |
-          msbuild DSP_Hooks\DSP_Hooks.vcxproj /p:Configuration="MP x4 MT Release" /p:Platform="Win32"
+          msbuild DSP_Hooks\DSP_Hooks.vcxproj /p:Configuration="MP x4 MT Release"
 
       - name: Compile DSP_Externals
         run: |
-          msbuild DSP_Externals\DSP_Externals.vcxproj /p:Configuration="MP x4 MT Release" /p:Platform="Win32"
+          msbuild DSP_Externals\DSP_Externals.vcxproj /p:Configuration="MP x4 MT Release"
 
       - name: Compile DSP_DevTools
         run: |
-          msbuild DSP_DevTools\DSP_DevTools.vcxproj /p:Configuration="MP x4 MT Release" /p:Platform="Win32"
+          msbuild DSP_DevTools\DSP_DevTools.vcxproj /p:Configuration="MP x4 MT Release"
 
       - name: Upload DSP_Hooks plugin
         uses: softprops/action-gh-release@v2
