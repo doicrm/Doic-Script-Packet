@@ -2784,6 +2784,9 @@
     <ClInclude Include="MenuStatus.cpp">
       <Filter>Plugin\Workspace\Hooks</Filter>
     </ClInclude>
+    <ClInclude Include="InfoManager.cpp">
+      <Filter>Plugin\Workspace\Hooks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".build_settings.inl">

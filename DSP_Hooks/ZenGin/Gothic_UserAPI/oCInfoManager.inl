@@ -3,3 +3,4 @@
 // User API for oCInfoManager
 // Add your methods here
 
+void oCInfoManager::Unarchive_Union(zCArchiver& arc);

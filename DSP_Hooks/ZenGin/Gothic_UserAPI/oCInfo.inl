@@ -3,3 +3,4 @@
 // User API for oCInfo
 // Add your methods here
 
+void oCInfo::Info_Union();

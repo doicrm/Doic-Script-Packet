@@ -4,6 +4,7 @@
 // Automatically generated block
 #pragma region Includes
 #include "MenuStatus.cpp"
+#include "InfoManager.cpp"
 #include "Plugin.cpp"
 #pragma endregion
 
