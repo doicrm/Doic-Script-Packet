@@ -2,44 +2,49 @@
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
+
+    void SetPositionWorld(zCVob* vob, const zVEC3& position)
+    {
+        const bool collDetectionStatic = vob->collDetectionStatic;
+        const bool collDetectionDynamic = vob->collDetectionDynamic;
+        vob->SetCollDet(false);
+        vob->SetPositionWorld(position);
+        vob->SetCollDetStat(collDetectionStatic);
+        vob->SetCollDetDyn(collDetectionDynamic);
+    }
+
     int Wld_InsertVob() // On WPs or FPs
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING point, vobName, visualName;
-        BOOL isCollDet, isSetOnFloor;
-        par->GetParameter(isSetOnFloor);
+        BOOL isCollDet;
         par->GetParameter(isCollDet);
         par->GetParameter(visualName);
         par->GetParameter(point);
         par->GetParameter(vobName);
-        oCVob* vob = new oCVob();
+        zCVob* vob = new zCVob();
         zVEC3 pos;
-        zCWaypoint* wp = ogame->GetWorld()->wayNet->GetWaypoint(point);
+        zCWaypoint* wp = ogame->GetGameWorld()->wayNet->GetWaypoint(point.Upper());
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pointVob = ogame->GetGameWorld()->SearchVobByName(point);
+            zCVob* pointVob = ogame->GetGameWorld()->SearchVobByName(point.Upper());
             if (pointVob)
                 pos = pointVob->GetPositionWorld();
         }
-        vob->SetVobName(vobName);
-        vob->SetPositionWorld(pos);
-        vob->SetVisual(visualName);
-        vob->SetCollDet(0);
+        vob->SetVobName(vobName.Upper());
+        vob->SetVisual(zCVisual::LoadVisual(visualName.Upper()));
+        vob->SetCollDetDyn(isCollDet);
         ogame->GetGameWorld()->AddVob(vob);
-        if (isSetOnFloor)
-            vob->SetOnFloor(pos);
-        vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(1);
-        vob->SetSleeping(1);
+        SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
     }
 
     int Vob_MoveTo() // To WPs or FPs
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING point, vobName;
         par->GetParameter(point);
         par->GetParameter(vobName);
@@ -69,7 +74,7 @@ namespace GOTHIC_ENGINE {
 
     int Vob_MoveToPos()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         int posx, posy, posz;
         zSTRING point, vobName;
         par->GetParameter(posz);
@@ -93,36 +98,30 @@ namespace GOTHIC_ENGINE {
 
     int Wld_InsertVobPos()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         int posx, posy, posz;
-        zSTRING vobName, visualName;
-        BOOL isCollDet, isSetOnFloor;
-        par->GetParameter(isSetOnFloor);
+        zSTRING point, vobName, visualName;
+        BOOL isCollDet;
         par->GetParameter(isCollDet);
         par->GetParameter(visualName);
         par->GetParameter(posz);
         par->GetParameter(posy);
         par->GetParameter(posx);
         par->GetParameter(vobName);
+        zCVob* vob = new zCVob();
         zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
-        oCVob* vob = new oCVob();
-        vob->SetVobName(vobName);
-        vob->SetPositionWorld(pos);
-        vob->SetVisual(visualName);
-        vob->SetCollDet(0);
+        vob->SetVobName(vobName.Upper());
+        vob->SetVisual(zCVisual::LoadVisual(visualName.Upper()));
+        vob->SetCollDetDyn(isCollDet);
         ogame->GetGameWorld()->AddVob(vob);
-        if (isSetOnFloor)
-            vob->SetOnFloor(pos);
-        vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(1);
-        vob->SetSleeping(1);
+        SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
     }
 
     int Wld_RemoveVob()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING vobName;
         par->GetParameter(vobName);
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
@@ -139,7 +138,7 @@ namespace GOTHIC_ENGINE {
 
     int Vob_Rotate()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         int posx, posy, posz;
         zSTRING vobName;
         par->GetParameter(posz);
@@ -162,7 +161,7 @@ namespace GOTHIC_ENGINE {
 
     int Vob_SetVisual()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING vobName, visualName;
         par->GetParameter(visualName);
         par->GetParameter(vobName);
@@ -176,7 +175,7 @@ namespace GOTHIC_ENGINE {
 
     int Vob_ClearVisual()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING vobName;
         par->GetParameter(vobName);
         zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
@@ -189,7 +188,7 @@ namespace GOTHIC_ENGINE {
 
     int Vob_SetName()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING vobName, newName;
         par->GetParameter(newName);
         par->GetParameter(vobName);
@@ -203,7 +202,7 @@ namespace GOTHIC_ENGINE {
 
     int Vob_SearchByName()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING vobName;
         par->GetParameter(vobName);
         zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
@@ -215,7 +214,7 @@ namespace GOTHIC_ENGINE {
 
     int Wld_InsertMob() // On WPs or FPs
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING point, vobName, visualName;
         BOOL isCollDet, isSetOnFloor;
         par->GetParameter(isSetOnFloor);
@@ -250,7 +249,7 @@ namespace GOTHIC_ENGINE {
 
     int Wld_InsertMobPos()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         int posx, posy, posz;
         zSTRING vobName, visualName;
         BOOL isCollDet, isSetOnFloor;
@@ -279,7 +278,7 @@ namespace GOTHIC_ENGINE {
 
     int Wld_InsertMobInter() // On WPs or FPs
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING point, vobName, visualName;
         BOOL isCollDet, isSetOnFloor;
         par->GetParameter(isSetOnFloor);
@@ -314,7 +313,7 @@ namespace GOTHIC_ENGINE {
 
     int Wld_InsertMobInterPos()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         int posx, posy, posz;
         zSTRING vobName, visualName;
         BOOL isCollDet, isSetOnFloor;
@@ -343,7 +342,7 @@ namespace GOTHIC_ENGINE {
 
     int Wld_SetMobInterProps()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING mobName, newTriggerTarget, newUseWithItem, newConditionFunc, newOnStateFuncName;
         par->GetParameter(newOnStateFuncName);
         par->GetParameter(newConditionFunc);

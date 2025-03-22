@@ -4,7 +4,7 @@
 namespace GOTHIC_ENGINE {
 	int AI_TurnToWP()
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		zSTRING point;
 		par->GetParameter(point);
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
@@ -24,7 +24,7 @@ namespace GOTHIC_ENGINE {
 
 	int AI_TurnToVob()
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		zSTRING point;
 		par->GetParameter(point);
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());

@@ -4,7 +4,7 @@
 namespace GOTHIC_ENGINE {
 	int Npc_GetRoutineName() // FIXME: Doesn't return routine's name correctly!
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		zSTRING routine = "";
 		oCNpc* npc = (oCNpc*)par->GetInstance();
 		if (npc)
@@ -19,7 +19,7 @@ namespace GOTHIC_ENGINE {
 
 	int Npc_IsInRoutineName()
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		zSTRING routine, currentRoutine;
 		BOOL result = false;
 		par->GetParameter(routine);
@@ -45,7 +45,7 @@ namespace GOTHIC_ENGINE {
 	// by Gratt from zParserExtender
 	int Npc_GetSlotItem()
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		oCNpc* npc;
 		zSTRING slotName;
 		par->GetParameter(slotName);
@@ -57,7 +57,7 @@ namespace GOTHIC_ENGINE {
 
 	int Npc_EquipItem()
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		oCItem* item = (oCItem*)par->GetInstance();
 		oCNpc* npc = (oCNpc*)par->GetInstance();
 		npc->Equip(item);
@@ -66,7 +66,7 @@ namespace GOTHIC_ENGINE {
 
 	int Npc_IsInWorld()
 	{
-		zCParser* par = zCParser::GetParser();
+		auto const par = zCParser::GetParser();
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
 		BOOL result = false;
 		if (npc)

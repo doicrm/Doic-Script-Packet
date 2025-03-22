@@ -93,6 +93,7 @@ namespace GOTHIC_ENGINE {
 
       // func int Log_GetTopicStatus(var string logName) 
       parser->DefineExternal("Log_GetTopicStatus", Log_GetTopicStatus, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+      //parser->DefineExternal("DIA_AddChoice", DIA_AddChoice, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_FUNC, 0);
 
       //---------------------------------------------------------------------
       // NPC
@@ -122,10 +123,10 @@ namespace GOTHIC_ENGINE {
       // VOB
       //---------------------------------------------------------------------
 
-      // func void Wld_InsertVob(var string vobName, var string point, var string visualName, var int isCollDet, var int isSetOnFloor)
-      parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-      // func void Wld_InsertVobPos(var string vobName, var int posx, var int posy, var int posz, var string visualName, var int isCollDet, var int isSetOnFloor)
-      parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+      // func void Wld_InsertVob(var string vobName, var string point, var string visualName, var int isCollDet)
+      parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
+      // func void Wld_InsertVobPos(var string vobName, var int posx, var int posy, var int posz, var string visualName, var int isCollDet)
+      parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
       // func int Wld_RemoveVob(var string vobName)
       parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
       // func void Vob_Rotate(var string vobName, var int posx, var int posy, var int posz)

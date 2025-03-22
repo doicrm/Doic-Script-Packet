@@ -5,7 +5,7 @@ namespace GOTHIC_ENGINE {
     // by Gratt from zParserExtender
     int Log_GetTopicStatus()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING value;
         par->GetParameter(value);
         oCLogManager& logs = oCLogManager::GetLogManager();
@@ -26,10 +26,25 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    //int DIA_AddChoice()
+    //{
+    //    auto const par = zCParser::GetParser();
+    //    int func;
+    //    zSTRING text;
+    //    par->GetParameter(func);
+    //    par->GetParameter(text);
+    //    int index = parser->GetIndex("DIA_CURRENTINSTANCE");
+    //    oCInfo* pInfo = ogame->GetInfoManager()->GetInformation(index);
+    //    if (pInfo) {
+    //        pInfo->AddChoice(text, func);
+    //    }
+    //    return 0;
+    //}
+
     // by Gratt from zParserExtender
     int Wld_PlayEffectOnVob()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING effect;
         zCVob* pvob;
         int level;
@@ -51,7 +66,7 @@ namespace GOTHIC_ENGINE {
     // by Gratt from zParserExtender
     int Wld_PlayEffectAt()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING effect;
         zVEC3 ppos;
         int level;
@@ -72,7 +87,7 @@ namespace GOTHIC_ENGINE {
 
     int Wld_GetPlayerPortalName()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         BOOL result = false;
         zSTRING portalName, currentPortalName;
         par->GetParameter(portalName);
@@ -87,7 +102,7 @@ namespace GOTHIC_ENGINE {
     template<typename T>
     int Ext_ReadStatArray()
     {
-        auto par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         int idx; par->GetParameter(idx);
         static T ele; ele = T{};
         if (idx < 0)
@@ -106,7 +121,7 @@ namespace GOTHIC_ENGINE {
     template<typename T>
     int Ext_WriteStatArray()
     {
-        auto par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         T value; par->GetParameter(value);
         int idx; par->GetParameter(idx);
         if (idx < 0) return 0;
@@ -118,7 +133,7 @@ namespace GOTHIC_ENGINE {
 
     int Menu_SetItemText()
     {
-        zCParser* par = zCParser::GetParser();
+        auto const par = zCParser::GetParser();
         zSTRING menuItemName, menuItemText;
         par->GetParameter(menuItemText);
         par->GetParameter(menuItemName);
