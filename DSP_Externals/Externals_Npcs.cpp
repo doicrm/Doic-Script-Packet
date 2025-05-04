@@ -2,17 +2,13 @@
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
-	int Npc_GetRoutineName() // FIXME: Doesn't return routine's name correctly!
+	int Npc_GetRoutineName()
 	{
+		static zSTRING routine = "";
 		auto const par = zCParser::GetParser();
-		zSTRING routine = "";
 		oCNpc* npc = (oCNpc*)par->GetInstance();
-		if (npc)
-		{
-			oCNpc_States* npcStates = &npc->state;
-			if (npcStates)
-				routine = npcStates->GetRoutineName();
-		}
+		oCNpc_States* npcStates = &npc->state;
+		routine = npcStates ? (zSTRING&)npcStates->GetRoutineName() : "";
 		par->SetReturn(routine);
 		return 0;
 	}
@@ -24,20 +20,14 @@ namespace GOTHIC_ENGINE {
 		BOOL result = false;
 		par->GetParameter(routine);
 		oCNpc* npc = (oCNpc*)par->GetInstance();
-		if (npc)
-		{
-			oCNpc_States* npcStates = &npc->state;
-			if (npcStates)
-			{
-				currentRoutine = npcStates->GetRoutineName();
-				routine = routine.Upper();
-				if (!routine.StartWith("RTN_"))
-					routine = "RTN_" + routine;
-				if (!routine.EndWith("_" + (zSTRING)npc->idx))
-					routine = routine + "_" + (zSTRING)npc->idx;
-				result = currentRoutine == routine;
-			}
-		}
+		oCNpc_States* npcStates = &npc->state;
+		currentRoutine = npcStates ? (zSTRING&)npcStates->GetRoutineName() : "";
+		routine = routine ? routine.Upper() : "";
+		if (!routine.StartWith("RTN_"))
+			routine = "RTN_" + routine;
+		if (!routine.EndWith("_" + (zSTRING)npc->idx))
+			routine = routine + "_" + (zSTRING)npc->idx;
+		result = currentRoutine == routine;
 		par->SetReturn(result);
 		return 0;
 	}
@@ -66,12 +56,27 @@ namespace GOTHIC_ENGINE {
 
 	int Npc_IsInWorld()
 	{
+		BOOL result = false;
 		auto const par = zCParser::GetParser();
 		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
-		BOOL result = false;
-		if (npc)
-			result = npc->GetHomeWorld()->GetObjectName() == ogame->GetGameWorld()->GetObjectName();
+		static zSTRING npcHomeWorldName = npc ? (zSTRING&)npc->GetHomeWorld()->GetObjectName() : "";
+		static zSTRING gameWorldName = (zSTRING&)ogame->GetWorld()->GetObjectName();
+		result = npcHomeWorldName == gameWorldName;
 		par->SetReturn(result);
 		return 0;
+	}
+
+	void DefineNpcExternals()
+	{
+		// func int Npc_IsInWorld(var C_NPC npc)
+		parser->DefineExternal("Npc_IsInWorld", Npc_IsInWorld, zPAR_TYPE_INT, zPAR_TYPE_INSTANCE, 0);
+		// func int Npc_GetRoutineName(var C_NPC npc)
+		parser->DefineExternal("Npc_GetRoutineName", Npc_GetRoutineName, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, 0);
+		// func int Npc_IsInRoutineName(var C_NPC npc, var string routine)
+		parser->DefineExternal("Npc_IsInRoutineName", Npc_IsInRoutineName, zPAR_TYPE_INT, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+		// func int Npc_GetSlotItem(var C_NPC slf)
+		parser->DefineExternal("Npc_GetSlotItem", Npc_GetSlotItem, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+		// func int Npc_EquipItem(var C_NPC slf, var C_Item itm)
+		parser->DefineExternal("Npc_EquipItem", Npc_EquipItem, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
 	}
 }

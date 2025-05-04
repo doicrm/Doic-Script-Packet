@@ -22,24 +22,9 @@ namespace GOTHIC_ENGINE {
             list = list->GetNextInList();
         }
 
-        par->SetReturn(-1);
+        par->SetReturn(static_cast<int>(oCLogTopic::zELogTopicStatus_Free));
         return 0;
     }
-
-    //int DIA_AddChoice()
-    //{
-    //    auto const par = zCParser::GetParser();
-    //    int func;
-    //    zSTRING text;
-    //    par->GetParameter(func);
-    //    par->GetParameter(text);
-    //    int index = parser->GetIndex("DIA_CURRENTINSTANCE");
-    //    oCInfo* pInfo = ogame->GetInfoManager()->GetInformation(index);
-    //    if (pInfo) {
-    //        pInfo->AddChoice(text, func);
-    //    }
-    //    return 0;
-    //}
 
     // by Gratt from zParserExtender
     int Wld_PlayEffectOnVob()
@@ -86,6 +71,18 @@ namespace GOTHIC_ENGINE {
     }
 
     int Wld_GetPlayerPortalName()
+    {
+        static zSTRING result = "";
+        auto const par = zCParser::GetParser();
+        zSTRING portalName, currentPortalName;
+        par->GetParameter(portalName);
+        oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
+        currentPortalName = portal->curPlayerPortal;
+        par->SetReturn(currentPortalName);
+        return 0;
+    }
+
+    int Wld_IsPlayerInPortalName()
     {
         auto const par = zCParser::GetParser();
         BOOL result = false;
