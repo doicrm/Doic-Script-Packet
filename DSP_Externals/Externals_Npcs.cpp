@@ -54,22 +54,8 @@ namespace GOTHIC_ENGINE {
 		return 0;
 	}
 
-	int Npc_IsInWorld()
-	{
-		BOOL result = false;
-		auto const par = zCParser::GetParser();
-		oCNpc* npc = dynamic_cast<oCNpc*>((zCVob*)par->GetInstance());
-		static zSTRING npcHomeWorldName = npc ? (zSTRING&)npc->GetHomeWorld()->GetObjectName() : "";
-		static zSTRING gameWorldName = (zSTRING&)ogame->GetWorld()->GetObjectName();
-		result = npcHomeWorldName == gameWorldName;
-		par->SetReturn(result);
-		return 0;
-	}
-
 	void DefineNpcExternals()
 	{
-		// func int Npc_IsInWorld(var C_NPC npc)
-		parser->DefineExternal("Npc_IsInWorld", Npc_IsInWorld, zPAR_TYPE_INT, zPAR_TYPE_INSTANCE, 0);
 		// func int Npc_GetRoutineName(var C_NPC npc)
 		parser->DefineExternal("Npc_GetRoutineName", Npc_GetRoutineName, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, 0);
 		// func int Npc_IsInRoutineName(var C_NPC npc, var string routine)

@@ -102,6 +102,13 @@ namespace GOTHIC_ENGINE {
       DefineNpcExternals();
 
       //---------------------------------------------------------------------
+      // Item
+      //---------------------------------------------------------------------
+
+      // func C_Item Hlp_GetItem(var int itemInstance)
+      parser->DefineExternal("Hlp_GetItem", Hlp_GetItem, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, 0);
+
+      //---------------------------------------------------------------------
       // WLD
       //---------------------------------------------------------------------
 
@@ -135,6 +142,13 @@ namespace GOTHIC_ENGINE {
       parser->DefineExternal("GetStringArrayValue", Ext_ReadStatArray<zSTRING>, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
       parser->DefineExternal("SetIntArrayValue", Ext_WriteStatArray<int>, zPAR_TYPE_VOID, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
       parser->DefineExternal("SetStringArrayValue", Ext_WriteStatArray<zSTRING>, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+
+      // var string Str_ToUpperCase(var string str)
+      parser->DefineExternal("Str_ToUpperCase", Str_ToUpperCase, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      // var string Str_ToLowerCase(var string str)
+      parser->DefineExternal("Str_ToLowerCase", Str_ToLowerCase, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      // var string Str_ToCapitelCase(var string str)
+      parser->DefineExternal("Str_ToCapitelCase", Str_ToCapitelCase, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
   }
 
   void Game_ApplyOptions() {

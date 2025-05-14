@@ -26,6 +26,25 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Hlp_GetItem()
+    {
+        auto const par = zCParser::GetParser();
+        oCItem* item = NULL;
+        int instance;
+        par->GetParameter(instance);
+        zCPar_Symbol* sym = par->GetSymbol(instance);
+        if (sym) {
+            if (sym->type == zPAR_TYPE_INSTANCE) {
+                item = dynamic_cast<oCItem*>((zCVob*)sym->GetInstanceAdr());
+            }
+            if (!item) {
+                item = zDYNAMIC_CAST<oCItem>(ogame->GetGameWorld()->SearchVobByName(sym->name));
+            }
+        }
+        par->SetReturn(item);
+        return 0;
+    }
+
     // by Gratt from zParserExtender
     int Wld_PlayEffectOnVob()
     {
@@ -144,6 +163,39 @@ namespace GOTHIC_ENGINE {
 #if ENGINE > Engine_G1A
         menuItem->Release();
 #endif
+        return 0;
+    }
+
+    int Str_ToUpperCase()
+    {
+        static zSTRING result = "";
+        auto const par = zCParser::GetParser();
+        zSTRING str;
+        par->GetParameter(str);
+        result = (zSTRING&)str.Upper();
+        par->SetReturn(result);
+        return 0;
+    }
+
+    int Str_ToLowerCase()
+    {
+		static zSTRING result = "";
+        auto const par = zCParser::GetParser();
+        zSTRING str;
+        par->GetParameter(str);
+        result = (zSTRING&)str.Lower();
+        par->SetReturn(result);
+        return 0;
+    }
+
+    int Str_ToCapitelCase()
+    {
+        static zSTRING result = "";
+        auto const par = zCParser::GetParser();
+        zSTRING str;
+        par->GetParameter(str);
+        result = (zSTRING&)str.UpperFirstLowerRest();
+        par->SetReturn(result);
         return 0;
     }
 }
