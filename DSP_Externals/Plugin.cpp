@@ -114,10 +114,8 @@ namespace GOTHIC_ENGINE {
 
       parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
       parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-      // func int Wld_GetPlayerPortalName()
-      parser->DefineExternal("Wld_GetPlayerPortalName", Wld_GetPlayerPortalName, zPAR_TYPE_INT, 0);
-      // func int Wld_IsPlayerInPortalName(var string portalName)
-      parser->DefineExternal("Wld_IsPlayerInPortalName", Wld_GetPlayerPortalName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+      // func string Wld_GetPlayerPortalRoom()
+      parser->DefineExternal("Wld_GetPlayerPortalRoom", Wld_GetPlayerPortalRoom, zPAR_TYPE_STRING, 0);
 
       //---------------------------------------------------------------------
       // VOB

@@ -89,27 +89,12 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    int Wld_GetPlayerPortalName()
+    int Wld_GetPlayerPortalRoom()
     {
         static zSTRING result = "";
-        auto const par = zCParser::GetParser();
-        zSTRING portalName, currentPortalName;
-        par->GetParameter(portalName);
-        oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
-        currentPortalName = portal->curPlayerPortal;
-        par->SetReturn(currentPortalName);
-        return 0;
-    }
-
-    int Wld_IsPlayerInPortalName()
-    {
-        auto const par = zCParser::GetParser();
-        BOOL result = false;
-        zSTRING portalName, currentPortalName;
-        par->GetParameter(portalName);
-        oCPortalRoomManager* portal = ogame->GetPortalRoomManager();
-        currentPortalName = portal->curPlayerPortal;
-        result = currentPortalName.Upper() == portalName.Upper();
+        zCParser* par = zCParser::GetParser();
+        oCPortalRoomManager* portalMng = ogame->GetPortalRoomManager();
+        result = (zSTRING&)portalMng->curPlayerPortal || "";
         par->SetReturn(result);
         return 0;
     }
