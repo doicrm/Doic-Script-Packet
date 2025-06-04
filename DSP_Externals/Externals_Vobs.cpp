@@ -449,7 +449,7 @@ namespace GOTHIC_ENGINE {
         parser->DefineExternal("Vob_MoveTo", Vob_MoveTo, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
         // func void Vob_MoveToPos(var string vobName, var int posx, var int posy, var int posz)
         parser->DefineExternal("Vob_MoveToPos", Vob_MoveToPos, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-        // func void Vob_SearchByName(var string vobName)
+        // func int Vob_SearchByName(var string vobName)
         parser->DefineExternal("Vob_SearchByName", Vob_SearchByName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
         // func void Wld_InsertMobInter(var string vobName, var string visualName, var string point)
         parser->DefineExternal("Wld_InsertMobInter", Wld_InsertMobInter, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);

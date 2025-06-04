@@ -36,10 +36,9 @@ namespace GOTHIC_ENGINE {
 	int Npc_GetSlotItem()
 	{
 		auto const par = zCParser::GetParser();
-		oCNpc* npc;
 		zSTRING slotName;
 		par->GetParameter(slotName);
-		npc = (oCNpc*)par->GetInstance();
+		oCNpc* npc = (oCNpc*)par->GetInstance();
 		oCItem* item = npc->GetSlotItem(slotName.Upper())->CastTo<oCItem>();
 		par->SetReturn(item);
 		return 0;
@@ -48,21 +47,25 @@ namespace GOTHIC_ENGINE {
 	int Npc_EquipItem()
 	{
 		auto const par = zCParser::GetParser();
-		oCItem* item = (oCItem*)par->GetInstance();
+		int index;
+		par->GetParameter(index);
+		zCPar_Symbol* sym = par->GetSymbol(index);
 		oCNpc* npc = (oCNpc*)par->GetInstance();
-		npc->Equip(item);
+		oCItem* item = dynamic_cast<oCItem*>((zCVob*)sym->GetInstanceAdr());
+		if (npc && item)
+			npc->Equip(item);
 		return 0;
 	}
 
 	void DefineNpcExternals()
 	{
-		// func int Npc_GetRoutineName(var C_NPC npc)
+		// func string Npc_GetRoutineName(var C_NPC npc)
 		parser->DefineExternal("Npc_GetRoutineName", Npc_GetRoutineName, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, 0);
-		// func int Npc_IsInRoutineName(var C_NPC npc, var string routine)
+		// func string Npc_IsInRoutineName(var C_NPC npc, var string routine)
 		parser->DefineExternal("Npc_IsInRoutineName", Npc_IsInRoutineName, zPAR_TYPE_INT, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
-		// func int Npc_GetSlotItem(var C_NPC slf)
+		// func C_Item Npc_GetSlotItem(var C_NPC npc)
 		parser->DefineExternal("Npc_GetSlotItem", Npc_GetSlotItem, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
-		// func int Npc_EquipItem(var C_NPC slf, var C_Item itm)
-		parser->DefineExternal("Npc_EquipItem", Npc_EquipItem, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INSTANCE, 0);
+		// func void Npc_EquipItem(var C_NPC npc, var int itemInstance)
+		parser->DefineExternal("Npc_EquipItem", Npc_EquipItem, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, 0);
 	}
 }
