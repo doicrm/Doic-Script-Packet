@@ -143,11 +143,30 @@ namespace GOTHIC_ENGINE {
             cmd << "Menu_SetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
             return 0;
         };
-        menuItem->SetText(menuItemText, 0, 0);
-
+        menuItem->SetText(menuItemText, 0, FALSE);
 #if ENGINE > Engine_G1A
         menuItem->Release();
 #endif
+        return 0;
+    }
+
+    int Menu_GetItemText()
+    {
+        static zSTRING result = "";
+        auto const par = zCParser::GetParser();
+        zSTRING menuItemName;
+        par->GetParameter(menuItemName);
+        zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName.Upper());
+        if (!menuItem) {
+            cmd << "Menu_GetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
+            par->SetReturn((zSTRING&)result);
+            return 0;
+        };
+        result = (zSTRING&)menuItem->GetText(0);
+#if ENGINE > Engine_G1A
+        menuItem->Release();
+#endif
+        par->SetReturn(result);
         return 0;
     }
 
@@ -180,6 +199,19 @@ namespace GOTHIC_ENGINE {
         zSTRING str;
         par->GetParameter(str);
         result = (zSTRING&)str.UpperFirstLowerRest();
+        par->SetReturn(result);
+        return 0;
+    }
+
+    int Hlp_StrCmp()
+    {
+        zSTRING s1, s2;
+        auto const par = zCParser::GetParser();
+        par->GetParameter(s2);
+        par->GetParameter(s1);
+        s1.Upper();
+        s2.Upper();
+        BOOL result = s1 == s2;
         par->SetReturn(result);
         return 0;
     }

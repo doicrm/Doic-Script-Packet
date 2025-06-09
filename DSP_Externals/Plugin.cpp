@@ -84,15 +84,28 @@ namespace GOTHIC_ENGINE {
       // MENU
       //---------------------------------------------------------------------
 
-      // func void Menu_SetItemText(var string menuItemName, var int value)
-      parser->DefineExternal("Menu_SetItemText", Menu_SetItemText, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      // func void Menu_SetItemText(var string menuItemName, var string value)
+      parser->DefineExternal("Menu_SetItemText", Menu_SetItemText, 
+          zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      parserMenu->DefineExternal("Menu_SetItemText", Menu_SetItemText, 
+          zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+
+      // func string Menu_GetItemText(var string menuItemName)
+      parser->DefineExternal("Menu_GetItemText", Menu_GetItemText,
+          zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      parserMenu->DefineExternal("Menu_GetItemText", Menu_GetItemText,
+          zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+
+      parserMenu->DefineExternal("Hlp_StrCmp", Hlp_StrCmp,
+          zPAR_TYPE_INT, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
 
       //---------------------------------------------------------------------
       // LOG
       //---------------------------------------------------------------------
 
       // func int Log_GetTopicStatus(var string logName) 
-      parser->DefineExternal("Log_GetTopicStatus", Log_GetTopicStatus, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("Log_GetTopicStatus", Log_GetTopicStatus,
+          zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
       //parser->DefineExternal("DIA_AddChoice", DIA_AddChoice, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_FUNC, 0);
 
       //---------------------------------------------------------------------
@@ -106,16 +119,20 @@ namespace GOTHIC_ENGINE {
       //---------------------------------------------------------------------
 
       // func C_Item Hlp_GetItem(var int itemInstance)
-      parser->DefineExternal("Hlp_GetItem", Hlp_GetItem, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, 0);
+      parser->DefineExternal("Hlp_GetItem", Hlp_GetItem, 
+          zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, 0);
 
       //---------------------------------------------------------------------
       // WLD
       //---------------------------------------------------------------------
 
-      parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-      parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+      parser->DefineExternal("Wld_PlayEffectOnVob", Wld_PlayEffectOnVob, 
+          zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+      parser->DefineExternal("Wld_PlayEffectAt", Wld_PlayEffectAt, 
+          zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INSTANCE, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
       // func string Wld_GetPlayerPortalRoom()
-      parser->DefineExternal("Wld_GetPlayerPortalRoom", Wld_GetPlayerPortalRoom, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("Wld_GetPlayerPortalRoom", Wld_GetPlayerPortalRoom,
+          zPAR_TYPE_STRING, 0);
 
       //---------------------------------------------------------------------
       // VOB
@@ -128,25 +145,34 @@ namespace GOTHIC_ENGINE {
       //---------------------------------------------------------------------
 
       // func string AI_TurnToWP(var C_NPC npc, var string wp)
-      parser->DefineExternal("AI_TurnToWP", AI_TurnToWP, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("AI_TurnToWP", AI_TurnToWP,
+          zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
       // func string AI_TurnToVob(var C_NPC npc, var string vobName)
-      parser->DefineExternal("AI_TurnToVob", AI_TurnToVob, zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("AI_TurnToVob", AI_TurnToVob,
+          zPAR_TYPE_VOID, zPAR_TYPE_INSTANCE, zPAR_TYPE_STRING, 0);
 
       //---------------------------------------------------------------------
       // Other
       //---------------------------------------------------------------------
 
-      parser->DefineExternal("GetIntArrayValue", Ext_ReadStatArray<int>, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-      parser->DefineExternal("GetStringArrayValue", Ext_ReadStatArray<zSTRING>, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
-      parser->DefineExternal("SetIntArrayValue", Ext_WriteStatArray<int>, zPAR_TYPE_VOID, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
-      parser->DefineExternal("SetStringArrayValue", Ext_WriteStatArray<zSTRING>, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("GetIntArrayValue", Ext_ReadStatArray<int>, 
+          zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+      parser->DefineExternal("GetStringArrayValue", Ext_ReadStatArray<zSTRING>, 
+          zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
+      parser->DefineExternal("SetIntArrayValue", Ext_WriteStatArray<int>, 
+          zPAR_TYPE_VOID, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+      parser->DefineExternal("SetStringArrayValue", Ext_WriteStatArray<zSTRING>, 
+          zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
 
       // var string Str_ToUpperCase(var string str)
-      parser->DefineExternal("Str_ToUpperCase", Str_ToUpperCase, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("Str_ToUpperCase", Str_ToUpperCase, 
+          zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
       // var string Str_ToLowerCase(var string str)
-      parser->DefineExternal("Str_ToLowerCase", Str_ToLowerCase, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("Str_ToLowerCase", Str_ToLowerCase,
+          zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
       // var string Str_ToCapitelCase(var string str)
-      parser->DefineExternal("Str_ToCapitelCase", Str_ToCapitelCase, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+      parser->DefineExternal("Str_ToCapitelCase", Str_ToCapitelCase,
+          zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
   }
 
   void Game_ApplyOptions() {

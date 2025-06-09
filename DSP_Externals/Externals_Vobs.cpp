@@ -432,28 +432,40 @@ namespace GOTHIC_ENGINE {
     void DefineVobExternals()
     {
         // func void Wld_InsertVob(var string vobName, var string visualName, var string point, var int isCollDet)
-        parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
+        parser->DefineExternal("Wld_InsertVob", Wld_InsertVob,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, 0);
         // func void Wld_InsertVobPos(var string vobName, var string visualName, var int posx, var int posy, var int posz, var int isCollDet)
-        parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+        parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         // func int Wld_RemoveVob(var string vobName)
-        parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob,
+            zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
         // func void Vob_Rotate(var string vobName, var int posx, var int posy, var int posz)
-        parser->DefineExternal("Vob_Rotate", Vob_Rotate, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+        parser->DefineExternal("Vob_Rotate", Vob_Rotate,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         // func void Vob_SetVisual(var string vobName, var string visualName)
-        parser->DefineExternal("Vob_SetVisual", Vob_SetVisual, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Vob_SetVisual", Vob_SetVisual,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
         // func void Vob_ClearVisual(var string vobName)
-        parser->DefineExternal("Vob_ClearVisual", Vob_ClearVisual, zPAR_TYPE_VOID, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Vob_ClearVisual", Vob_ClearVisual,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, 0);
         // func void Vob_SetName(var string oldVobName, var string newVobName)
-        parser->DefineExternal("Vob_SetName", Vob_SetName, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Vob_SetName", Vob_SetName,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
         // func void Vob_MoveTo(var string vobName, var string point)
-        parser->DefineExternal("Vob_MoveTo", Vob_MoveTo, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Vob_MoveTo", Vob_MoveTo,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
         // func void Vob_MoveToPos(var string vobName, var int posx, var int posy, var int posz)
-        parser->DefineExternal("Vob_MoveToPos", Vob_MoveToPos, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
+        parser->DefineExternal("Vob_MoveToPos", Vob_MoveToPos,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_INT, zPAR_TYPE_INT, zPAR_TYPE_INT, 0);
         // func int Vob_SearchByName(var string vobName)
-        parser->DefineExternal("Vob_SearchByName", Vob_SearchByName, zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Vob_SearchByName", Vob_SearchByName,
+            zPAR_TYPE_INT, zPAR_TYPE_STRING, 0);
         // func void Wld_InsertMobInter(var string vobName, var string visualName, var string point)
-        parser->DefineExternal("Wld_InsertMobInter", Wld_InsertMobInter, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Wld_InsertMobInter", Wld_InsertMobInter,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
         // func void Wld_InsertMobContainer(var string vobName, var string visualName, var string point)
-        parser->DefineExternal("Wld_InsertMobContainer", Wld_InsertMobContainer, zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
+        parser->DefineExternal("Wld_InsertMobContainer", Wld_InsertMobContainer,
+            zPAR_TYPE_VOID, zPAR_TYPE_STRING, zPAR_TYPE_STRING, zPAR_TYPE_STRING, 0);
     }
 }
