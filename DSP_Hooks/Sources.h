@@ -5,6 +5,7 @@
 #pragma region Includes
 #include "MenuStatus.cpp"
 #include "InfoManager.cpp"
+#include "MenuSavegame.cpp"
 #include "Plugin.cpp"
 #pragma endregion
 

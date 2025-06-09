@@ -3,3 +3,4 @@
 // User API for oCMenuSavegame
 // Add your methods here
 
+void oCMenuSavegame::HandleSlotChange_Union(int key);
