@@ -32,18 +32,6 @@ namespace GOTHIC_ENGINE {
 		return 0;
 	}
 
-	// by Gratt from zParserExtender
-	int Npc_GetSlotItem()
-	{
-		auto const par = zCParser::GetParser();
-		zSTRING slotName;
-		par->GetParameter(slotName);
-		oCNpc* npc = (oCNpc*)par->GetInstance();
-		oCItem* item = npc->GetSlotItem(slotName.Upper())->CastTo<oCItem>();
-		par->SetReturn(item);
-		return 0;
-	}
-
 	int Npc_EquipItem()
 	{
 		auto const par = zCParser::GetParser();

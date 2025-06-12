@@ -3,100 +3,48 @@
 
 namespace GOTHIC_ENGINE {
 
-    void SetPositionWorld(zCVob* vob, const zVEC3& position)
-    {
-        const bool collDetectionStatic = vob->collDetectionStatic;
-        const bool collDetectionDynamic = vob->collDetectionDynamic;
-        vob->SetCollDet(false);
-        vob->SetPositionWorld(position);
-        vob->SetCollDetStat(collDetectionStatic);
-        vob->SetCollDetDyn(collDetectionDynamic);
-    }
+#pragma push_macro("Z")
+#undef Z
 
-    void RotateVob(zCVob* vob, int posX, int posY, int posZ)
+    struct C_POSITION {
+        int X;
+        int Y;
+        int Z;
+    };
+
+    static void SetPositionWorld(zCVob* vob, const zVEC3& position)
     {
         const bool collDetectionStatic = vob->collDetectionStatic;
         const bool collDetectionDynamic = vob->collDetectionDynamic;
-        vob->SetCollDet(false);
-        vob->RotateWorldX((float)posX);
-        vob->RotateWorldY((float)posY);
-        vob->RotateWorldZ((float)posZ);
-        vob->SetCollDetStat(collDetectionStatic);
-        vob->SetCollDetDyn(collDetectionDynamic);
+        vob->collDetectionStatic = 0;
+        vob->collDetectionDynamic = 0;
+        vob->SetPositionWorld(position);
+        vob->collDetectionStatic = collDetectionStatic;
+        vob->collDetectionDynamic = collDetectionDynamic;
     }
 
     int Wld_InsertVob() // On WPs or FPs
     {
         auto const par = zCParser::GetParser();
-        zSTRING vobName, visualName, point;
-        BOOL isCollDet;
-        par->GetParameter(isCollDet);
+        zSTRING vobName, point;
         par->GetParameter(point);
-        par->GetParameter(visualName);
         par->GetParameter(vobName);
         zCVob* vob = new zCVob{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
         zVEC3 pos;
-        zCWaypoint* wp = ogame->GetGameWorld()->wayNet->GetWaypoint(point.Upper());
-        if (wp)
+        if (wp) {
             pos = wp->GetPositionWorld();
+        }
         else
         {
-            zCVob* pointVob = ogame->GetGameWorld()->SearchVobByName(point.Upper());
-            if (pointVob)
+            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            if (pointVob) {
                 pos = pointVob->GetPositionWorld();
+            }
         }
         vob->SetVobName(vobName.Upper());
-        vob->SetVisual(zCVisual::LoadVisual(visualName.Upper()));
-        vob->SetCollDetDyn(isCollDet);
-        ogame->GetGameWorld()->AddVob(vob);
-        SetPositionWorld(vob, pos);
-        vob->Release();
-        return 0;
-    }
-
-    int Vob_MoveTo() // To WPs or FPs
-    {
-        auto const par = zCParser::GetParser();
-        zSTRING point, vobName;
-        par->GetParameter(point);
-        par->GetParameter(vobName);
-        zVEC3 pos;
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
-        if (!vob)
-        {
-            cmd << "No Vob found with specified Vobname: " << vobName << endl;
-            return 0;
-        }
-        zCWaypoint* wp = ogame->GetWorld()->wayNet->GetWaypoint(point);
-        if (wp)
-            pos = wp->GetPositionWorld();
-        else
-        {
-            zCVob* pointVob = ogame->GetGameWorld()->SearchVobByName(point);
-            if (pointVob)
-                pos = pointVob->GetPositionWorld();
-        }
-        SetPositionWorld(vob, pos);
-        vob->Release();
-        return 0;
-    }
-
-    int Vob_MoveToPos()
-    {
-        auto const par = zCParser::GetParser();
-        int posx, posy, posz;
-        zSTRING point, vobName;
-        par->GetParameter(posz);
-        par->GetParameter(posy);
-        par->GetParameter(posx);
-        par->GetParameter(vobName);
-        zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
-        if (!vob)
-        {
-            cmd << "No Vob found with specified Vobname: " << vobName << endl;
-            return 0;
-        }
+        world->AddVob(vob);
         SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
@@ -105,20 +53,16 @@ namespace GOTHIC_ENGINE {
     int Wld_InsertVobPos()
     {
         auto const par = zCParser::GetParser();
-        int posx, posy, posz;
-        zSTRING point, vobName, visualName;
-        BOOL isCollDet;
-        par->GetParameter(isCollDet);
-        par->GetParameter(visualName);
-        par->GetParameter(posz);
-        par->GetParameter(posy);
-        par->GetParameter(posx);
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         par->GetParameter(vobName);
         zCVob* vob = new zCVob{};
-        zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
         vob->SetVobName(vobName.Upper());
-        vob->SetVisual(zCVisual::LoadVisual(visualName.Upper()));
-        vob->SetCollDetDyn(isCollDet);
         ogame->GetGameWorld()->AddVob(vob);
         SetPositionWorld(vob, pos);
         vob->Release();
@@ -130,38 +74,84 @@ namespace GOTHIC_ENGINE {
         auto const par = zCParser::GetParser();
         zSTRING vobName;
         par->GetParameter(vobName);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        oCWorld* world = ogame->GetGameWorld();
+        zCVob* vob = world->SearchVobByName(vobName);
         if (!vob)
         {
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
-            vob->Release();
             par->SetReturn(0);
             return 0;
         }
-        ogame->GetWorld()->RemoveVob(vob);
+        world->RemoveVob(vob);
         vob->Release();
         par->SetReturn(1);
+        return 0;
+    }
+
+    int Vob_MoveTo() // To WPs or FPs
+    {
+        auto const par = zCParser::GetParser();
+        zSTRING point, vobName;
+        par->GetParameter(point);
+        par->GetParameter(vobName);
+        oCWorld* world = ogame->GetGameWorld();
+        zCVob* vob = world->SearchVobByName(vobName);
+        if (!vob)
+        {
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
+            return 0;
+        }
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
+        zVEC3 pos;
+        if (wp) {
+            pos = wp->GetPositionWorld();
+        }
+        else
+        {
+            zCVob* pointVob = world->SearchVobByName(point);
+            if (pointVob) {
+                pos = pointVob->GetPositionWorld();
+            }
+        }
+        SetPositionWorld(vob, pos);
+        return 0;
+    }
+
+    int Wld_GetPos()
+    {
+        static C_POSITION vobPosition;
+        auto const par = zCParser::GetParser();
+        int posx, posy, posz;
+        par->GetParameter(posz);
+        par->GetParameter(posy);
+        par->GetParameter(posx);
+        vobPosition.X = posx;
+        vobPosition.Y = posy;
+        vobPosition.Z = posz;
+        par->SetReturn(&vobPosition);
         return 0;
     }
 
     int Vob_Rotate()
     {
         auto const par = zCParser::GetParser();
-        int posx, posy, posz;
         zSTRING vobName;
-        par->GetParameter(posz);
-        par->GetParameter(posy);
-        par->GetParameter(posx);
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         par->GetParameter(vobName);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
         if (!vob)
         {
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
-            vob->Release();
             return 0;
         }
-        RotateVob(vob, (float)posx, (float)posy, (float)posz);
-        vob->Release();
+        const bool collDetectionStatic = vob->collDetectionStatic;
+        const bool collDetectionDynamic = vob->collDetectionDynamic;
+        vob->SetCollDet(0);
+        vob->RotateWorldX((float)vobPosition->X);
+        vob->RotateWorldY((float)vobPosition->Y);
+        vob->RotateWorldZ((float)vobPosition->Z);
+        vob->collDetectionStatic = collDetectionStatic;
+        vob->collDetectionDynamic = collDetectionDynamic;
         return 0;
     }
 
@@ -171,117 +161,59 @@ namespace GOTHIC_ENGINE {
         zSTRING vobName, visualName;
         par->GetParameter(visualName);
         par->GetParameter(vobName);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
         if (!vob)
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
         else
             vob->SetVisual(zCVisual::LoadVisual(visualName.Upper()));
-        vob->Release();
         return 0;
     }
 
-    int Vob_ClearVisual()
+    int Vob_SetOnFloor()
     {
         auto const par = zCParser::GetParser();
         zSTRING vobName;
         par->GetParameter(vobName);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
+        oCWorld* world = ogame->GetGameWorld();
+        zCVob* vob = world->SearchVobByName(vobName);
         if (!vob)
+        {
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
-        else
-            vob->SetVisual("");
-        vob->Release();
-        return 0;
-    }
-
-    int Vob_SetName()
-    {
-        auto const par = zCParser::GetParser();
-        zSTRING vobName, newName;
-        par->GetParameter(newName);
-        par->GetParameter(vobName);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
-        if (!vob)
-            cmd << "No Vob found with specified Vobname: " << vobName << endl;
-        else
-            vob->SetVobName(newName);
-        vob->Release();
-        return 0;
-    }
-
-    int Vob_SearchByName()
-    {
-        auto const par = zCParser::GetParser();
-        zSTRING vobName;
-        par->GetParameter(vobName);
-        zCVob* vob = dynamic_cast<zCVob*>(ogame->GetWorld()->SearchVobByName(vobName));
-        if (vob) {
-            par->SetReturn(&vob);
-            vob->Release();
             return 0;
         }
-        par->SetReturn(-1);
-        vob->Release();
-        return 0;
-    }
-    
-    int Wld_InsertMobContainer()
-    {
-        auto const par = zCParser::GetParser();
-        zSTRING point, vobName, visualName;
-        par->GetParameter(visualName);
-        par->GetParameter(point);
-        par->GetParameter(vobName);
-        oCMobContainer* mob = new oCMobContainer{};
-        zVEC3 pos;
-        zCWaypoint* wp = ogame->GetGameWorld()->wayNet->GetWaypoint(point.Upper());
-        if (wp)
-            pos = wp->GetPositionWorld();
-        else
+        oCVob* obj = dynamic_cast<oCVob*>(vob);
+        if (obj)
         {
-            zCVob* pointVob = ogame->GetGameWorld()->SearchVobByName(point.Upper());
-            if (pointVob)
-                pos = pointVob->GetPositionWorld();
+            zVEC3 pos = vob->GetPositionWorld();
+            obj->SetOnFloor(pos);
         }
-        mob->SetVisual(zCVisual::LoadVisual(visualName));
-        mob->SetCollDetDyn(true);
-        ogame->GetGameWorld()->AddVob(mob);
-        SetPositionWorld(mob, pos);
-        mob->Release();
+        else {
+            cmd << "Vob found, but it is not an oCVob: " << vobName << endl;
+        }
         return 0;
     }
 
-    int Wld_InsertMob() // On WPs or FPs
+    int Wld_InsertMob()
     {
         auto const par = zCParser::GetParser();
-        zSTRING point, vobName, visualName;
-        BOOL isCollDet, isSetOnFloor;
-        par->GetParameter(isSetOnFloor);
-        par->GetParameter(isCollDet);
-        par->GetParameter(visualName);
+        zSTRING point, vobName;
         par->GetParameter(point);
         par->GetParameter(vobName);
-        oCVob* vob = new oCMOB{};
+        oCMOB* vob = new oCMOB{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
-        zCWaypoint* wp = ogame->GetWorld()->wayNet->GetWaypoint(point);
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pVob = ogame->GetGameWorld()->SearchVobByName(point);
+            zCVob* pVob = world->SearchVobByName(point);
             if (pVob)
                 pos = pVob->GetPositionWorld();
         }
-        vob->SetVobName(vobName);
-        vob->SetPositionWorld(pos);
-        vob->SetVisual(visualName);
-        vob->SetCollDet(0);
-        ogame->GetGameWorld()->AddVob(vob);
-        if (isSetOnFloor)
-            vob->SetOnFloor(pos);
-        vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(1);
-        vob->SetSleeping(1);
+        vob->SetVobName(vobName.Upper());
+        world->AddVob(vob);
+        SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
     }
@@ -289,143 +221,257 @@ namespace GOTHIC_ENGINE {
     int Wld_InsertMobPos()
     {
         auto const par = zCParser::GetParser();
-        int posx, posy, posz;
-        zSTRING vobName, visualName;
-        BOOL isCollDet, isSetOnFloor;
-        par->GetParameter(isSetOnFloor);
-        par->GetParameter(isCollDet);
-        par->GetParameter(visualName);
-        par->GetParameter(posz);
-        par->GetParameter(posy);
-        par->GetParameter(posx);
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         par->GetParameter(vobName);
-        zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
-        oCVob* vob = new oCMOB{};
-        vob->SetVobName(vobName);
-        vob->SetPositionWorld(pos);
-        vob->SetVisual(visualName);
-        vob->SetCollDet(0);
+        oCMOB* vob = new oCMOB{};
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
+        vob->SetVobName(vobName.Upper());
         ogame->GetGameWorld()->AddVob(vob);
-        if (isSetOnFloor)
-            vob->SetOnFloor(pos);
-        vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(1);
-        vob->SetSleeping(1);
+        SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
     }
 
-    int Wld_InsertMobInter() // On WPs or FPs
+    int Wld_InsertMobInter()
     {
         auto const par = zCParser::GetParser();
-        zSTRING point, vobName, visualName;
-        BOOL isCollDet, isSetOnFloor;
-        par->GetParameter(isSetOnFloor);
-        par->GetParameter(isCollDet);
-        par->GetParameter(visualName);
+        zSTRING point, vobName;
         par->GetParameter(point);
         par->GetParameter(vobName);
-        oCVob* vob = new oCMobInter{};
+        oCMobInter* vob = new oCMobInter{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
-        zCWaypoint* wp = ogame->GetWorld()->wayNet->GetWaypoint(point);
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pVob = ogame->GetGameWorld()->SearchVobByName(point);
+            zCVob* pVob = world->SearchVobByName(point);
             if (pVob)
                 pos = pVob->GetPositionWorld();
         }
-        vob->SetVobName(vobName);
-        vob->SetPositionWorld(pos);
-        vob->SetVisual(visualName);
-        vob->SetCollDet(0);
-        ogame->GetGameWorld()->AddVob(vob);
-        if (isSetOnFloor)
-            vob->SetOnFloor(pos);
-        vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(1);
-        vob->SetSleeping(1);
+        vob->SetVobName(vobName.Upper());
+        world->AddVob(vob);
+        SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
     }
-
-    //int Wld_InsertMobInter()
-    //{
-    //    auto const par = zCParser::GetParser();
-    //    zSTRING point, vobName, visualName;
-    //    par->GetParameter(visualName);
-    //    par->GetParameter(point);
-    //    par->GetParameter(vobName);
-    //    oCMobInter* mob = new oCMobInter{};
-    //    zVEC3 pos;
-    //    zCWaypoint* wp = ogame->GetGameWorld()->wayNet->GetWaypoint(point.Upper());
-    //    if (wp)
-    //        pos = wp->GetPositionWorld();
-    //    else
-    //    {
-    //        zCVob* pointVob = ogame->GetGameWorld()->SearchVobByName(point.Upper());
-    //        if (pointVob)
-    //            pos = pointVob->GetPositionWorld();
-    //    }
-    //    mob->SetVisual(zCVisual::LoadVisual(visualName));
-    //    mob->SetCollDetDyn(true);
-    //    ogame->GetGameWorld()->AddVob(mob);
-    //    SetPositionWorld(mob, pos);
-    //    mob->Release();
-    //    return 0;
-    //}
 
     int Wld_InsertMobInterPos()
     {
         auto const par = zCParser::GetParser();
-        int posx, posy, posz;
-        zSTRING vobName, visualName;
-        BOOL isCollDet, isSetOnFloor;
-        par->GetParameter(isSetOnFloor);
-        par->GetParameter(isCollDet);
-        par->GetParameter(visualName);
-        par->GetParameter(posz);
-        par->GetParameter(posy);
-        par->GetParameter(posx);
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         par->GetParameter(vobName);
-        zVEC3 pos = zVEC3((float)posx, (float)posy, (float)posz);
-        oCVob* vob = new oCMobInter{};
-        vob->SetVobName(vobName);
-        vob->SetPositionWorld(pos);
-        vob->SetVisual(visualName);
-        vob->SetCollDet(0);
+        oCMobInter* vob = new oCMobInter{};
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
+        vob->SetVobName(vobName.Upper());
         ogame->GetGameWorld()->AddVob(vob);
-        if (isSetOnFloor)
-            vob->SetOnFloor(pos);
-        vob->SetCollDet(isCollDet);
-        vob->SetPhysicsEnabled(1);
-        vob->SetSleeping(1);
+        SetPositionWorld(vob, pos);
         vob->Release();
         return 0;
     }
 
-    int Wld_SetMobInterProps()
+    int Wld_InsertMobContainer()
     {
+        zSTRING point, vobName;
         auto const par = zCParser::GetParser();
-        zSTRING mobName, newTriggerTarget, newUseWithItem, newConditionFunc, newOnStateFuncName;
-        par->GetParameter(newOnStateFuncName);
-        par->GetParameter(newConditionFunc);
-        par->GetParameter(newUseWithItem);
-        par->GetParameter(newTriggerTarget);
-        par->GetParameter(mobName);
-        oCMobInter* mobInter = dynamic_cast<oCMobInter*>(ogame->GetWorld()->SearchVobByName(mobName));
-        if (!mobInter)
+        par->GetParameter(point);
+        par->GetParameter(vobName);
+        oCMobContainer* mob = new oCMobContainer{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zVEC3 pos;
+        if (wp)
+            pos = wp->GetPositionWorld();
+        else
         {
-            cmd << "No MobInter found with specified name: " << mobName << endl;
-            mobInter->Release();
-            return 0;
+            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            if (pointVob)
+                pos = pointVob->GetPositionWorld();
         }
-        mobInter->triggerTarget = newTriggerTarget.Upper();
-        mobInter->useWithItem = newUseWithItem.Upper();
-        mobInter->conditionFunc = newConditionFunc.Upper();
-        mobInter->onStateFuncName = newOnStateFuncName.Upper();
-        mobInter->Release();
+        mob->SetVobName(vobName.Upper());
+        world->AddVob(mob);
+        SetPositionWorld(mob, pos);
+        mob->Release();
         return 0;
     }
+
+    int Wld_InsertMobContainerPos()
+    {
+        auto const par = zCParser::GetParser();
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        par->GetParameter(vobName);
+        oCMobContainer* vob = new oCMobContainer{};
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
+        vob->SetVobName(vobName.Upper());
+        ogame->GetGameWorld()->AddVob(vob);
+        SetPositionWorld(vob, pos);
+        vob->Release();
+        return 0;
+    }
+
+    int Wld_InsertMobFire()
+    {
+        zSTRING point, vobName;
+        auto const par = zCParser::GetParser();
+        par->GetParameter(point);
+        par->GetParameter(vobName);
+        oCMobFire* mob = new oCMobFire{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zVEC3 pos;
+        if (wp)
+            pos = wp->GetPositionWorld();
+        else
+        {
+            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            if (pointVob)
+                pos = pointVob->GetPositionWorld();
+        }
+        mob->SetVobName(vobName.Upper());
+        world->AddVob(mob);
+        SetPositionWorld(mob, pos);
+        mob->Release();
+        return 0;
+    }
+
+    int Wld_InsertMobFirePos()
+    {
+        auto const par = zCParser::GetParser();
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        par->GetParameter(vobName);
+        oCMobFire* vob = new oCMobFire{};
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
+        vob->SetVobName(vobName.Upper());
+        ogame->GetGameWorld()->AddVob(vob);
+        SetPositionWorld(vob, pos);
+        vob->Release();
+        return 0;
+    }
+
+    int Wld_InsertMobDoor()
+    {
+        zSTRING point, vobName;
+        auto const par = zCParser::GetParser();
+        par->GetParameter(point);
+        par->GetParameter(vobName);
+        oCMobDoor* mob = new oCMobDoor{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zVEC3 pos;
+        if (wp)
+            pos = wp->GetPositionWorld();
+        else
+        {
+            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            if (pointVob)
+                pos = pointVob->GetPositionWorld();
+        }
+        mob->SetVobName(vobName.Upper());
+        world->AddVob(mob);
+        SetPositionWorld(mob, pos);
+        mob->Release();
+        return 0;
+    }
+
+    int Wld_InsertMobDoorPos()
+    {
+        auto const par = zCParser::GetParser();
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        par->GetParameter(vobName);
+        oCMobDoor* vob = new oCMobDoor{};
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
+        vob->SetVobName(vobName.Upper());
+        ogame->GetGameWorld()->AddVob(vob);
+        SetPositionWorld(vob, pos);
+        vob->Release();
+        return 0;
+    }
+
+    int Wld_InsertMobBed()
+    {
+        zSTRING point, vobName;
+        auto const par = zCParser::GetParser();
+        par->GetParameter(point);
+        par->GetParameter(vobName);
+        oCMobBed* mob = new oCMobBed{};
+        oCWorld* world = ogame->GetGameWorld();
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zVEC3 pos;
+        if (wp)
+            pos = wp->GetPositionWorld();
+        else
+        {
+            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            if (pointVob)
+                pos = pointVob->GetPositionWorld();
+        }
+        mob->SetVobName(vobName.Upper());
+        world->AddVob(mob);
+        SetPositionWorld(mob, pos);
+        mob->Release();
+        return 0;
+    }
+
+    int Wld_InsertMobBedPos()
+    {
+        auto const par = zCParser::GetParser();
+        zSTRING vobName;
+        C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
+        par->GetParameter(vobName);
+        oCMobBed* vob = new oCMobBed{};
+        zVEC3 pos = zVEC3(
+            (float)vobPosition->X,
+            (float)vobPosition->Y,
+            (float)vobPosition->Z
+        );
+        vob->SetVobName(vobName.Upper());
+        ogame->GetGameWorld()->AddVob(vob);
+        SetPositionWorld(vob, pos);
+        vob->Release();
+        return 0;
+    }
+
+    int Hlp_IsValidVob()
+    {
+        auto const par = zCParser::GetParser();
+        zCVob* vob = ((zCVob*)par->GetInstance());
+        par->SetReturn(vob != NULL);
+        return 0;
+    }
+
+    int Cast_InstanceIsVob()
+    {
+        auto const par = zCParser::GetParser();
+        zCObject* instance = (zCObject*)par->GetInstance();
+        par->SetReturn((int)instance->CastTo<zCVob>());
+        return 0;
+    }
+
+#pragma pop_macro("Z")
 }

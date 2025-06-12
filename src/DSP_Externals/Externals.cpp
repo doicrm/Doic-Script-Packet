@@ -13,7 +13,7 @@ namespace GOTHIC_ENGINE {
         auto* list = &logs.m_lstTopics;
         while (list)
         {
-            auto topic = list->GetData();
+            auto const topic = list->GetData();
             if (topic && topic->m_strDescription == value)
             {
                 par->SetReturn(topic->m_enuStatus);
@@ -33,7 +33,9 @@ namespace GOTHIC_ENGINE {
         int instance;
         par->GetParameter(instance);
         zCPar_Symbol* sym = par->GetSymbol(instance);
-        if (sym) {
+
+        if (sym)
+        {
             if (sym->type == zPAR_TYPE_INSTANCE) {
                 item = dynamic_cast<oCItem*>((zCVob*)sym->GetInstanceAdr());
             }
@@ -41,51 +43,8 @@ namespace GOTHIC_ENGINE {
                 item = zDYNAMIC_CAST<oCItem>(ogame->GetGameWorld()->SearchVobByName(sym->name));
             }
         }
+
         par->SetReturn(item);
-        return 0;
-    }
-
-    // by Gratt from zParserExtender
-    int Wld_PlayEffectOnVob()
-    {
-        auto const par = zCParser::GetParser();
-        zSTRING effect;
-        zCVob* pvob;
-        int level;
-        int damage;
-        int damage_type;
-        int damage_speed;
-
-        par->GetParameter(damage_speed);
-        par->GetParameter(damage_type);
-        par->GetParameter(damage);
-        par->GetParameter(level);
-        pvob = (zCVob*)par->GetInstance();
-        par->GetParameter(effect);
-
-        oCVisualFX::CreateAndPlay(effect, pvob, Null, level, (float)damage, damage_type, damage_speed);
-        return 0;
-    }
-
-    // by Gratt from zParserExtender
-    int Wld_PlayEffectAt()
-    {
-        auto const par = zCParser::GetParser();
-        zSTRING effect;
-        zVEC3 ppos;
-        int level;
-        int damage;
-        int damage_type;
-        int damage_speed;
-
-        par->GetParameter(damage_speed);
-        par->GetParameter(damage_type);
-        par->GetParameter(damage);
-        par->GetParameter(level);
-        ppos = *(zVEC3*)par->GetInstance();
-        par->GetParameter(effect);
-
-        oCVisualFX::CreateAndPlay(effect, ppos, Null, level, (float)damage, damage_type, damage_speed);
         return 0;
     }
 
@@ -139,13 +98,18 @@ namespace GOTHIC_ENGINE {
         par->GetParameter(menuItemText);
         par->GetParameter(menuItemName);
         zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName.Upper());
-        if (!menuItem) {
+
+        if (!menuItem)
+        {
             cmd << "Menu_SetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
             return 0;
-        };
-        menuItem->SetText(menuItemText, 0, FALSE);
+        }
+
+        menuItem->SetText(menuItemText, 0, 0);
 #if ENGINE > Engine_G1A
         menuItem->Release();
+#else
+        menuItem = NULL;
 #endif
         return 0;
     }
@@ -157,20 +121,25 @@ namespace GOTHIC_ENGINE {
         zSTRING menuItemName;
         par->GetParameter(menuItemName);
         zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName.Upper());
-        if (!menuItem) {
+
+        if (!menuItem)
+        {
             cmd << "Menu_GetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
             par->SetReturn((zSTRING&)result);
             return 0;
-        };
+        }
+
         result = (zSTRING&)menuItem->GetText(0);
 #if ENGINE > Engine_G1A
         menuItem->Release();
+#else
+        menuItem = NULL;
 #endif
         par->SetReturn(result);
         return 0;
     }
 
-    int Str_ToUpperCase()
+    int Str_Upper()
     {
         static zSTRING result = "";
         auto const par = zCParser::GetParser();
@@ -181,7 +150,7 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    int Str_ToLowerCase()
+    int Str_Lower()
     {
 		static zSTRING result = "";
         auto const par = zCParser::GetParser();
@@ -192,7 +161,7 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    int Str_ToCapitelCase()
+    int Str_Capitel()
     {
         static zSTRING result = "";
         auto const par = zCParser::GetParser();
