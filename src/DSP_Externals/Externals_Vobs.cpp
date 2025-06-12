@@ -23,22 +23,23 @@ namespace GOTHIC_ENGINE {
         vob->collDetectionDynamic = collDetectionDynamic;
     }
 
-    int Wld_InsertVob() // On WPs or FPs
+    int Wld_InsertVob()
     {
         auto const par = zCParser::GetParser();
         zSTRING vobName, point;
         par->GetParameter(point);
         par->GetParameter(vobName);
+        point = point.Upper();
         zCVob* vob = new zCVob{};
         oCWorld* world = ogame->GetGameWorld();
-        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
         if (wp) {
             pos = wp->GetPositionWorld();
         }
         else
         {
-            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            zCVob* pointVob = world->SearchVobByName(point);
             if (pointVob) {
                 pos = pointVob->GetPositionWorld();
             }
@@ -75,6 +76,7 @@ namespace GOTHIC_ENGINE {
         zSTRING vobName;
         par->GetParameter(vobName);
         oCWorld* world = ogame->GetGameWorld();
+        vobName = vobName.Upper();
         zCVob* vob = world->SearchVobByName(vobName);
         if (!vob)
         {
@@ -88,13 +90,15 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
-    int Vob_MoveTo() // To WPs or FPs
+    int Vob_MoveTo()
     {
         auto const par = zCParser::GetParser();
         zSTRING point, vobName;
         par->GetParameter(point);
         par->GetParameter(vobName);
         oCWorld* world = ogame->GetGameWorld();
+        vobName = vobName.Upper();
+        point = point.Upper();
         zCVob* vob = world->SearchVobByName(vobName);
         if (!vob)
         {
@@ -138,6 +142,7 @@ namespace GOTHIC_ENGINE {
         zSTRING vobName;
         C_POSITION* vobPosition = (C_POSITION*)par->GetInstance();
         par->GetParameter(vobName);
+        vobName = vobName.Upper();
         zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
         if (!vob)
         {
@@ -161,6 +166,7 @@ namespace GOTHIC_ENGINE {
         zSTRING vobName, visualName;
         par->GetParameter(visualName);
         par->GetParameter(vobName);
+        vobName = vobName.Upper();
         zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
         if (!vob)
             cmd << "No Vob found with specified Vobname: " << vobName << endl;
@@ -175,6 +181,7 @@ namespace GOTHIC_ENGINE {
         zSTRING vobName;
         par->GetParameter(vobName);
         oCWorld* world = ogame->GetGameWorld();
+        vobName = vobName.Upper();
         zCVob* vob = world->SearchVobByName(vobName);
         if (!vob)
         {
@@ -199,6 +206,8 @@ namespace GOTHIC_ENGINE {
         zSTRING point, vobName;
         par->GetParameter(point);
         par->GetParameter(vobName);
+        vobName = vobName.Upper();
+        point = point.Upper();
         oCMOB* vob = new oCMOB{};
         oCWorld* world = ogame->GetGameWorld();
         zCWaypoint* wp = world->wayNet->GetWaypoint(point);
@@ -243,6 +252,7 @@ namespace GOTHIC_ENGINE {
         zSTRING point, vobName;
         par->GetParameter(point);
         par->GetParameter(vobName);
+        point = point.Upper();
         oCMobInter* vob = new oCMobInter{};
         oCWorld* world = ogame->GetGameWorld();
         zCWaypoint* wp = world->wayNet->GetWaypoint(point);
@@ -287,15 +297,16 @@ namespace GOTHIC_ENGINE {
         auto const par = zCParser::GetParser();
         par->GetParameter(point);
         par->GetParameter(vobName);
+        point = point.Upper();
         oCMobContainer* mob = new oCMobContainer{};
         oCWorld* world = ogame->GetGameWorld();
-        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            zCVob* pointVob = world->SearchVobByName(point);
             if (pointVob)
                 pos = pointVob->GetPositionWorld();
         }
@@ -331,15 +342,16 @@ namespace GOTHIC_ENGINE {
         auto const par = zCParser::GetParser();
         par->GetParameter(point);
         par->GetParameter(vobName);
+        point = point.Upper();
         oCMobFire* mob = new oCMobFire{};
         oCWorld* world = ogame->GetGameWorld();
-        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            zCVob* pointVob = world->SearchVobByName(point);
             if (pointVob)
                 pos = pointVob->GetPositionWorld();
         }
@@ -375,15 +387,16 @@ namespace GOTHIC_ENGINE {
         auto const par = zCParser::GetParser();
         par->GetParameter(point);
         par->GetParameter(vobName);
+        point = point.Upper();
         oCMobDoor* mob = new oCMobDoor{};
         oCWorld* world = ogame->GetGameWorld();
-        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            zCVob* pointVob = world->SearchVobByName(point);
             if (pointVob)
                 pos = pointVob->GetPositionWorld();
         }
@@ -419,15 +432,16 @@ namespace GOTHIC_ENGINE {
         auto const par = zCParser::GetParser();
         par->GetParameter(point);
         par->GetParameter(vobName);
+        point = point.Upper();
         oCMobBed* mob = new oCMobBed{};
         oCWorld* world = ogame->GetGameWorld();
-        zCWaypoint* wp = world->wayNet->GetWaypoint(point.Upper());
+        zCWaypoint* wp = world->wayNet->GetWaypoint(point);
         zVEC3 pos;
         if (wp)
             pos = wp->GetPositionWorld();
         else
         {
-            zCVob* pointVob = world->SearchVobByName(point.Upper());
+            zCVob* pointVob = world->SearchVobByName(point);
             if (pointVob)
                 pos = pointVob->GetPositionWorld();
         }

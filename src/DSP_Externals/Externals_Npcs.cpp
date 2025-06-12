@@ -2,32 +2,24 @@
 // Union SOURCE file
 
 namespace GOTHIC_ENGINE {
-	int Npc_GetRoutineName()
-	{
-		static zSTRING routine = "";
-		auto const par = zCParser::GetParser();
-		oCNpc* npc = (oCNpc*)par->GetInstance();
-		oCNpc_States* npcStates = &npc->state;
-		routine = npcStates ? (zSTRING&)npcStates->GetRoutineName() : "";
-		par->SetReturn(routine);
-		return 0;
-	}
-
 	int Npc_IsInRoutineName()
 	{
+		BOOL result = false;
 		auto const par = zCParser::GetParser();
 		zSTRING routine, currentRoutine;
-		BOOL result = false;
 		par->GetParameter(routine);
 		oCNpc* npc = (oCNpc*)par->GetInstance();
-		oCNpc_States* npcStates = &npc->state;
-		currentRoutine = npcStates ? (zSTRING&)npcStates->GetRoutineName() : "";
-		routine = routine ? routine.Upper() : "";
+		currentRoutine = npc->state.GetRoutineName().Upper();
+		routine = routine.Upper();
+
 		if (!routine.StartWith("RTN_"))
 			routine = "RTN_" + routine;
-		if (!routine.EndWith("_" + (zSTRING)npc->idx))
-			routine = routine + "_" + (zSTRING)npc->idx;
-		result = currentRoutine == routine;
+
+		zSTRING npcId = zSTRING(npc->idx);
+		if (!routine.EndWith("_" + npcId))
+			routine = routine + "_" + npcId;
+
+		result = currentRoutine == routine.Upper();
 		par->SetReturn(result);
 		return 0;
 	}

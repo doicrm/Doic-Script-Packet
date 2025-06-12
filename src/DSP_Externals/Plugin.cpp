@@ -109,8 +109,6 @@ namespace GOTHIC_ENGINE {
       // NPC
       //---------------------------------------------------------------------
 
-      // func string Npc_GetRoutineName(var C_NPC npc)
-      parser->DefineExternal("Npc_GetRoutineName", Npc_GetRoutineName, STR, INST, 0);
       // func int Npc_IsInRoutineName(var C_NPC npc, var string routine)
       parser->DefineExternal("Npc_IsInRoutineName", Npc_IsInRoutineName, INT, INST, STR, 0);
       // func void Npc_EquipItem(var C_NPC npc, var int itemInstance)

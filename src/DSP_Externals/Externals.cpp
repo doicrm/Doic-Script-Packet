@@ -97,11 +97,12 @@ namespace GOTHIC_ENGINE {
         zSTRING menuItemName, menuItemText;
         par->GetParameter(menuItemText);
         par->GetParameter(menuItemName);
-        zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName.Upper());
+        menuItemName = menuItemName.Upper();
+        zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName);
 
         if (!menuItem)
         {
-            cmd << "Menu_SetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
+            cmd << "Menu_SetItemText: Invalid Menu Item: " << menuItemName << endl;
             return 0;
         }
 
@@ -120,11 +121,12 @@ namespace GOTHIC_ENGINE {
         auto const par = zCParser::GetParser();
         zSTRING menuItemName;
         par->GetParameter(menuItemName);
-        zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName.Upper());
+        menuItemName = menuItemName.Upper();
+        zCMenuItem* menuItem = zCMenuItem::GetByName(menuItemName);
 
         if (!menuItem)
         {
-            cmd << "Menu_GetItemText: Invalid Menu Item: " << menuItemName.Upper() << endl;
+            cmd << "Menu_GetItemText: Invalid Menu Item: " << menuItemName << endl;
             par->SetReturn((zSTRING&)result);
             return 0;
         }
