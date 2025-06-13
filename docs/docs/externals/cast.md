@@ -9,4 +9,4 @@ func int Cast_InstanceIsVob(var instance object) {};
 ```
 
 - `object` - object to check
-- `return` - `TRUE` or `FALSE`
+- `return` - `TRUE` if object is an Vob, `FALSE` otherwise

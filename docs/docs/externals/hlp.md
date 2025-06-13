@@ -11,6 +11,10 @@ func C_Item Hlp_GetItem(var int itemInstance) {};
 - `itemInstance` - instance name of the item
 - `return` - link to item object
 
+```dae title="Example usage"
+var C_Item torch; torch = Hlp_GetItem(ItLsTorch);
+```
+
 ## Hlp_IsValidVob
 
 Checks if vob is in the game world.
