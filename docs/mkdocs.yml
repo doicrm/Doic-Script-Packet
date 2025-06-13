@@ -1,0 +1,32 @@
+site_name: DSP Docs
+copyright: Copyright &copy; Doic 2024-2025
+site_url: https://doicrm.github.io/doic-script-packet
+repo_url: https://doicrm.github.io/doic-script-packet
+repo_name: doicrm/Doic-Script-Packet
+theme:
+  name: material
+  palette:
+    scheme: slate
+  font:
+    code: JetBrains Mono
+  features:
+    - navigation.footer
+nav:
+  - Home: index.md
+  - Externals:
+    - AI functions: externals/ai.md
+    - CAST functions: externals/cast.md
+    - HLP functions: externals/hlp.md
+    - Log functions: externals/log.md
+    - MOB functions: externals/mob.md
+    - Menu functions: externals/menu.md
+    - NPC functions: externals/npc.md
+    - String functions: externals/str.md
+    - VOB functions: externals/vob.md
+    - WLD functions: externals/wld.md
+    - Utility functions: externals/utils.md
+  - Hooks: hooks/index.md
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/doicrm/Doic-Script-Packet

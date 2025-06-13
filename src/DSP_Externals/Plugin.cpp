@@ -109,7 +109,7 @@ namespace GOTHIC_ENGINE {
       // NPC
       //---------------------------------------------------------------------
 
-      // func int Npc_IsInRoutineName(var C_NPC npc, var string routine)
+      // func int Npc_IsInRoutineName(var C_NPC npc, var string routineName)
       parser->DefineExternal("Npc_IsInRoutineName", Npc_IsInRoutineName, INT, INST, STR, 0);
       // func void Npc_EquipItem(var C_NPC npc, var int itemInstance)
       parser->DefineExternal("Npc_EquipItem", Npc_EquipItem, VOID, INST, INT, 0);
@@ -121,19 +121,19 @@ namespace GOTHIC_ENGINE {
       // func string Wld_GetPlayerPortalRoom()
       parser->DefineExternal("Wld_GetPlayerPortalRoom", Wld_GetPlayerPortalRoom, STR, 0);
 
-      // func void Wld_InsertVob(var string vobName, var string point)
+      // func void Wld_InsertVob(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertVob", Wld_InsertVob<zCVob>, VOID, STR, STR, 0);
-      // func void Wld_InsertMob(var string vobName, var string point)
+      // func void Wld_InsertMob(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertMob", Wld_InsertVob<oCMOB>, VOID, STR, STR, 0);
-      // func void Wld_InsertMobInter(var string vobName, var string point)
+      // func void Wld_InsertMobInter(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertMobInter", Wld_InsertVob<oCMobInter>, VOID, STR, STR, 0);
-      // func void Wld_InsertMobContainer(var string vobName, var string point)
+      // func void Wld_InsertMobContainer(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertMobContainer", Wld_InsertVob<oCMobContainer>, VOID, STR, STR, 0);
-      // func void Wld_InsertMobFire(var string vobName, var string point)
+      // func void Wld_InsertMobFire(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertMobFire", Wld_InsertVob<oCMobFire>, VOID, STR, STR, 0);
-      // func void Wld_InsertMobDoor(var string vobName, var string point)
+      // func void Wld_InsertMobDoor(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertMobDoor", Wld_InsertVob<oCMobDoor>, VOID, STR, STR, 0);
-      // func void Wld_InsertMobBed(var string vobName, var string point)
+      // func void Wld_InsertMobBed(var string vobName, var string pointName)
       parser->DefineExternal("Wld_InsertMobBed", Wld_InsertVob<oCMobBed>, VOID, STR, STR, 0);
 
       // func void Wld_InsertVobPos(var string vobName, var C_POSITION vobPosition)
@@ -181,23 +181,23 @@ namespace GOTHIC_ENGINE {
 
       // func void Vob_Rotate(var string vobName, var C_Position vobPosition)
       parser->DefineExternal("Vob_Rotate", Vob_Rotate, VOID, STR, INST, 0);
-      // func void Vob_MoveTo(var string vobName, var string point)
+      // func void Vob_MoveTo(var string vobName, var string pointName)
       parser->DefineExternal("Vob_MoveTo", Vob_MoveTo, VOID, STR, STR, 0);
       // func void Vob_SetOnFloor(var string vobName)
       parser->DefineExternal("Vob_SetOnFloor", Vob_SetOnFloor, VOID, STR, 0);
       // func void Vob_SetVisual(var string vobName, var string visualName)
       parser->DefineExternal("Vob_SetVisual", Vob_SetVisual, VOID, STR, STR, 0);
 
-      // func void Mob_SetFocusName(var string vobName, var string focusName)
+      // func void Mob_SetFocusName(var string mobName, var string focusName)
       parser->DefineExternal("Mob_SetFocusName", Mob_SetFocusName, VOID, STR, STR, 0);
-      // func string Mob_GetFocusName(var string vobName)
+      // func string Mob_GetFocusName(var string mobName)
       parser->DefineExternal("Mob_GetFocusName", Mob_GetFocusName, STR, STR, 0);
 
       //---------------------------------------------------------------------
       // AI
       //---------------------------------------------------------------------
 
-      // func void AI_TurnToWP(var C_NPC npc, var string wp)
+      // func void AI_TurnToWP(var C_NPC npc, var string wpName)
       parser->DefineExternal("AI_TurnToWP", AI_TurnToWP, VOID, INST, STR, 0);
       // func void AI_TurnToVob(var C_NPC npc, var string vobName)
       parser->DefineExternal("AI_TurnToVob", AI_TurnToVob, VOID, INST, STR, 0);

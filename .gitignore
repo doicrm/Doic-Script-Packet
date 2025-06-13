@@ -359,3 +359,5 @@ MP x[24] M[dDtT] Release
 
 *.last
 *.bat
+
+docs/env
