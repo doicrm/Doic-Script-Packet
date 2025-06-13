@@ -1,16 +1,29 @@
 site_name: DSP Docs
-copyright: Copyright &copy; Doic 2024-2025
+copyright: Copyright &copy; Doic 2024 - 2025
 site_url: https://doicrm.github.io/doic-script-packet
 repo_url: https://github.com/doicrm/Doic-Script-Packet
 repo_name: doicrm/Doic-Script-Packet
 theme:
   name: material
   palette:
-    scheme: slate
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
   font:
     code: JetBrains Mono
   features:
+    - navigation.indexes
     - navigation.footer
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+    - content.tooltips
 nav:
   - Home: index.md
   - Externals:
@@ -30,3 +43,19 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/doicrm/Doic-Script-Packet
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      use_pygments: true
+      linenums: true
+      anchor_linenums: true
+      line_anchors: example
+      line_spans: example
+      pygments_lang_class: true
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
