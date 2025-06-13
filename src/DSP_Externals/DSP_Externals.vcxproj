@@ -874,19 +874,43 @@ $(ALLUSERSPROFILE)\Union\SDK\Union\v1.0m\Build\incver.exe $(ProjectDir)</Command
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClInclude Include="Externals.cpp">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Externals_AI.cpp">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Externals_Npcs.cpp">
+    <ClInclude Include="Externals_Cast.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Hlp.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Log.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Menu.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Npc.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Str.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Utils.cpp">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Externals_Vobs.cpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Externals_Wld.cpp">
       <SubType>
       </SubType>
     </ClInclude>

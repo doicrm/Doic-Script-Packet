@@ -122,33 +122,34 @@ namespace GOTHIC_ENGINE {
       parser->DefineExternal("Wld_GetPlayerPortalRoom", Wld_GetPlayerPortalRoom, STR, 0);
 
       // func void Wld_InsertVob(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertVob", Wld_InsertVob, VOID, STR, STR, 0);
-      // func void Wld_InsertVobPos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertVob", Wld_InsertVob<zCVob>, VOID, STR, STR, 0);
       // func void Wld_InsertMob(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertMob", Wld_InsertMob, VOID, STR, STR, 0);
+      parser->DefineExternal("Wld_InsertMob", Wld_InsertVob<oCMOB>, VOID, STR, STR, 0);
       // func void Wld_InsertMobInter(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertMobInter", Wld_InsertMobInter, VOID, STR, STR, 0);
+      parser->DefineExternal("Wld_InsertMobInter", Wld_InsertVob<oCMobInter>, VOID, STR, STR, 0);
       // func void Wld_InsertMobContainer(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertMobContainer", Wld_InsertMobContainer, VOID, STR, STR, 0);
+      parser->DefineExternal("Wld_InsertMobContainer", Wld_InsertVob<oCMobContainer>, VOID, STR, STR, 0);
       // func void Wld_InsertMobFire(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertMobFire", Wld_InsertMobFire, VOID, STR, STR, 0);
+      parser->DefineExternal("Wld_InsertMobFire", Wld_InsertVob<oCMobFire>, VOID, STR, STR, 0);
       // func void Wld_InsertMobDoor(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertMobDoor", Wld_InsertMobDoor, VOID, STR, STR, 0);
+      parser->DefineExternal("Wld_InsertMobDoor", Wld_InsertVob<oCMobDoor>, VOID, STR, STR, 0);
       // func void Wld_InsertMobBed(var string vobName, var string point)
-      parser->DefineExternal("Wld_InsertMobBed", Wld_InsertMobBed, VOID, STR, STR, 0);
+      parser->DefineExternal("Wld_InsertMobBed", Wld_InsertVob<oCMobBed>, VOID, STR, STR, 0);
+
+      // func void Wld_InsertVobPos(var string vobName, var C_POSITION vobPosition)
+      parser->DefineExternal("Wld_InsertVobPos", Wld_InsertVobPos<zCVob>, VOID, STR, INST, 0);
       // func void Wld_InsertMobPos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertMobPos", Wld_InsertMobPos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertMobPos", Wld_InsertVobPos<oCMOB>, VOID, STR, INST, 0);
       // func void Wld_InsertMobInterPos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertMobInterPos", Wld_InsertMobInterPos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertMobInterPos", Wld_InsertVobPos<oCMobInter>, VOID, STR, INST, 0);
       // func void Wld_InsertMobContainerPos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertMobContainerPos", Wld_InsertMobContainerPos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertMobContainerPos", Wld_InsertVobPos<oCMobContainer>, VOID, STR, INST, 0);
       // func void Wld_InsertMobFirePos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertMobFirePos", Wld_InsertMobFirePos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertMobFirePos", Wld_InsertVobPos<oCMobFire>, VOID, STR, INST, 0);
       // func void Wld_InsertMobDoorPos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertMobDoorPos", Wld_InsertMobDoorPos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertMobDoorPos", Wld_InsertVobPos<oCMobDoor>, VOID, STR, INST, 0);
       // func void Wld_InsertMobBedPos(var string vobName, var C_POSITION vobPosition)
-      parser->DefineExternal("Wld_InsertMobBedPos", Wld_InsertMobBedPos, VOID, STR, INST, 0);
+      parser->DefineExternal("Wld_InsertMobBedPos", Wld_InsertVobPos<oCMobBed>, VOID, STR, INST, 0);
 
       // func int Wld_RemoveVob(var string vobName)
       parser->DefineExternal("Wld_RemoveVob", Wld_RemoveVob, INT, STR, 0);

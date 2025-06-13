@@ -2781,16 +2781,34 @@
       <Filter>Plugin\Workspace\Plugin</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Externals.cpp">
-      <Filter>Plugin\Workspace\Externals</Filter>
-    </ClInclude>
     <ClInclude Include="Externals_AI.cpp">
       <Filter>Plugin\Workspace\Externals</Filter>
     </ClInclude>
-    <ClInclude Include="Externals_Npcs.cpp">
+    <ClInclude Include="Externals_Npc.cpp">
       <Filter>Plugin\Workspace\Externals</Filter>
     </ClInclude>
     <ClInclude Include="Externals_Vobs.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Utils.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Hlp.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Cast.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Str.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Menu.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Wld.cpp">
+      <Filter>Plugin\Workspace\Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals_Log.cpp">
       <Filter>Plugin\Workspace\Externals</Filter>
     </ClInclude>
   </ItemGroup>
