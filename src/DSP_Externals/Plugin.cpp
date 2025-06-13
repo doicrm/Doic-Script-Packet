@@ -188,6 +188,11 @@ namespace GOTHIC_ENGINE {
       // func void Vob_SetVisual(var string vobName, var string visualName)
       parser->DefineExternal("Vob_SetVisual", Vob_SetVisual, VOID, STR, STR, 0);
 
+      // func void Mob_SetFocusName(var string vobName, var string focusName)
+      parser->DefineExternal("Mob_SetFocusName", Mob_SetFocusName, VOID, STR, STR, 0);
+      // func string Mob_GetFocusName(var string vobName)
+      parser->DefineExternal("Mob_GetFocusName", Mob_GetFocusName, STR, STR, 0);
+
       //---------------------------------------------------------------------
       // AI
       //---------------------------------------------------------------------

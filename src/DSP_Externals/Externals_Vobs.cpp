@@ -206,5 +206,44 @@ namespace GOTHIC_ENGINE {
         return 0;
     }
 
+    int Mob_SetFocusName()
+    {
+        auto const par = zCParser::GetParser();
+        zSTRING vobName, focusName;
+        par->GetParameter(focusName);
+        par->GetParameter(vobName);
+        vobName = vobName.Upper();
+        focusName = focusName.Upper();
+        zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
+        if (!vob)
+        {
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
+            return 0;
+        }
+        oCMOB* mob = vob->CastTo<oCMOB>();
+        mob->SetName(focusName);
+        return 0;
+    }
+
+    int Mob_GetFocusName()
+    {
+        static zSTRING result = "";
+        auto const par = zCParser::GetParser();
+        zSTRING vobName;
+        par->GetParameter(vobName);
+        vobName = vobName.Upper();
+        zCVob* vob = ogame->GetGameWorld()->SearchVobByName(vobName);
+        if (!vob)
+        {
+            cmd << "No Vob found with specified Vobname: " << vobName << endl;
+            par->SetReturn(result);
+            return 0;
+        }
+        oCMOB* mob = vob->CastTo<oCMOB>();
+        result = (zSTRING&)mob->GetName();
+        par->SetReturn(result);
+        return 0;
+    }
+
 #pragma pop_macro("Z")
 }
