@@ -1,7 +1,7 @@
 site_name: DSP Docs
 copyright: Copyright &copy; Doic 2024-2025
 site_url: https://doicrm.github.io/doic-script-packet
-repo_url: https://doicrm.github.io/doic-script-packet
+repo_url: https://github.com/doicrm/Doic-Script-Packet
 repo_name: doicrm/Doic-Script-Packet
 theme:
   name: material
